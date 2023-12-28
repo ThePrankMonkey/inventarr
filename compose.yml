@@ -15,7 +15,7 @@ services:
     image: $PROJECT_NAME/be
     build: be
     environment:
-      MONGODB_URL: "mongodb+srv://root:example@db/dev?retryWrites=true&w=majority"
+      MONGODB_URL: "mongodb://root:example@db:27017/dev?authSource=admin&retryWrites=true&w=majority"
     volumes:
       - ./be:/src
     ports:
