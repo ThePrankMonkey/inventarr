@@ -10,6 +10,8 @@ const CreateItem = () => {
   const [formData, setFormData] = useState({
     name: "",
     pocket_id: "",
+    chest_id: "",
+    room_id: "",
     quantity: 0,
     upc: "",
     notes: "",
@@ -17,9 +19,17 @@ const CreateItem = () => {
 
   const bubbleUpRooms = (value) => {
     setRoomId(value);
+    setFormData({
+      ...formData,
+      room_id: value,
+    });
   };
   const bubbleUpRoomChests = (value) => {
     setChestId(value);
+    setFormData({
+      ...formData,
+      chest_id: value,
+    });
   };
   const bubbleUpChestPockets = (value) => {
     setFormData({
@@ -42,6 +52,7 @@ const CreateItem = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+      console.log(response.json());
       //TODO Update Banner
       //TODO Clear some fields like name, quantity, UPC, and notes. Leave room/chest/pocket.
     } catch (error) {
@@ -51,80 +62,86 @@ const CreateItem = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Enter a name:
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              name: e.target.value,
-            })
-          }
-        />
-      </label>
-      <label>
-        Enter a quantity:
-        <input
-          type="text"
-          value={formData.quantity}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              quantity: e.target.value,
-            })
-          }
-        />
-      </label>
-      <label>
-        Select a room:
-        <ListRooms bubbleUp={bubbleUpRooms} />
-      </label>
-      <label>
-        Select a chest:
-        {roomId ? (
-          <ListRoomChests bubbleUp={bubbleUpRoomChests} roomId={roomId} />
-        ) : (
-          <p>"Please select a room first"</p>
-        )}
-      </label>
-      <label>
-        Select a pocket:
-        {chestId ? (
-          <ListChestPockets bubbleUp={bubbleUpChestPockets} chestId={chestId} />
-        ) : (
-          <p>"Please select a chest first"</p>
-        )}
-      </label>
-      <label>
-        Enter a UPC:
-        <input
-          type="text"
-          value={formData.upc}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              upc: e.target.value,
-            })
-          }
-        />
-      </label>
-      <label>
-        Enter notes:
-        <textarea
-          value={formData.notes}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              notes: e.target.value,
-            })
-          }
-        />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <h1>Create a new Item</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Enter a name:
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                name: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Enter a quantity:
+          <input
+            type="text"
+            value={formData.quantity}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                quantity: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Select a room:
+          <ListRooms bubbleUp={bubbleUpRooms} />
+        </label>
+        <label>
+          Select a chest:
+          {roomId ? (
+            <ListRoomChests bubbleUp={bubbleUpRoomChests} roomId={roomId} />
+          ) : (
+            <p>"Please select a room first"</p>
+          )}
+        </label>
+        <label>
+          Select a pocket:
+          {chestId ? (
+            <ListChestPockets
+              bubbleUp={bubbleUpChestPockets}
+              chestId={chestId}
+            />
+          ) : (
+            <p>"Please select a chest first"</p>
+          )}
+        </label>
+        <label>
+          Enter a UPC:
+          <input
+            type="text"
+            value={formData.upc}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                upc: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Enter notes:
+          <textarea
+            value={formData.notes}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                notes: e.target.value,
+              })
+            }
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 };
 
