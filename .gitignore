@@ -2,3 +2,4 @@
 
 **/.envrc
 **/poetry.lock
+be/database.db

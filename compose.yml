@@ -1,34 +1,43 @@
-version: "3.1"
-
 services:
-  db:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: dev
-    # ports:
-    #   - 27017:27017
+  # db:
+  #   image: mongo
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #     MONGO_INITDB_DATABASE: dev
+  #   # ports:
+  #   #   - 27017:27017
+  #   networks:
+  #     - inventarr
 
   be:
-    image: $PROJECT_NAME/be
-    build: be
-    environment:
-      MONGODB_URL: "mongodb://root:example@db:27017/dev?authSource=admin&retryWrites=true&w=majority"
+    build:
+      context: ./be
+      dockerfile: Dockerfile
+    # environment:
+    #   MONGODB_URL: "mongodb://root:example@db:27017/dev?authSource=admin&retryWrites=true&w=majority"
     volumes:
       - ./be:/src
     ports:
       - 5123:5000
+    # depends_on:
+    #   - db
+    networks:
+      - inventarr
+  fe:
+    build:
+      context: ./fe
+      dockerfile: Dockerfile
+    volumes:
+      - ./fe:/app
+    ports:
+      - 3123:3000
     depends_on:
-      - db
+      - be
+    networks:
+      - inventarr
 
-  # fe:
-  #   image: $PROJECT_NAME/fe
-  #   build: be
-  #   environment:
-  #     - COMPOSE_PROJECT_NAME
-  #   ports:
-  #     - 80:80
-  #   depends_on:
-  #     - be
+networks:
+  inventarr:
+    driver: bridge
