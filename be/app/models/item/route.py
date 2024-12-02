@@ -39,6 +39,17 @@ def get_items(
     return items
 
 
+@router.get("/full", response_model=list[ItemPublicFull])
+def get_items_full(
+    session: SessionDep,
+    offset: int = 0,
+    limit: Annotated[int, Query(le=100)] = 100,
+):
+    logger.debug("Request to GET items")
+    items = session.exec(select(Item).offset(offset).limit(limit)).all()
+    return items
+
+
 @router.get("/{item_id}")
 def get_item(item_id: int, session: SessionDep):
     logger.debug(f"Request to GET Item {item_id}")
