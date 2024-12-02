@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
 
 
 ###########
@@ -12,6 +12,8 @@ class RoomBase(SQLModel):
 
 class Room(RoomBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
+    items: list["Item"] = Relationship(back_populates="room")
+    chests: list["Chest"] = Relationship(back_populates="room")
 
 
 class RoomPublic(RoomBase):

@@ -1,13 +1,18 @@
 import json
+import logging
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .db import create_db_and_tables
+from .load_test_data import create_demo_data
 from .models.room.route import router as room_router
 from .models.chest.route import router as chest_router
 from .models.pocket.route import router as pocket_router
 from .models.item.route import router as item_router
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 app.include_router(room_router)
@@ -34,6 +39,7 @@ app.add_middleware(
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
+    # create_demo_data()
 
 
 @app.get("/")

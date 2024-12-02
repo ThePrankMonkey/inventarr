@@ -1,4 +1,5 @@
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
+from app.models.room.model import Room
 
 
 ############
@@ -12,6 +13,9 @@ class ChestBase(SQLModel):
 
 class Chest(ChestBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
+    items: list["Item"] = Relationship(back_populates="chest")
+    pockets: list["Pocket"] = Relationship(back_populates="chest")
+    room: Room | None = Relationship(back_populates="chests")
 
 
 class ChestPublic(ChestBase):

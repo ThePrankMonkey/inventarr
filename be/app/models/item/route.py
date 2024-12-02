@@ -7,9 +7,13 @@ from app.db import SessionDep
 from app.models.item.model import (
     Item,
     ItemPublic,
+    ItemPublicFull,
     ItemCreate,
     ItemUpdate,
 )
+from app.models.room.model import Room
+from app.models.chest.model import Chest
+from app.models.pocket.model import Pocket
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/items")
@@ -43,6 +47,17 @@ def get_item(item_id: int, session: SessionDep):
         raise HTTPException(status_code=404, detail="Item not found")
     logger.info(f"Item {item_id}: {item}")
     return item
+
+
+@router.get("/{item_id}/full", response_model=ItemPublicFull)
+def get_item_full(item_id: int, session: SessionDep):
+    logger.debug(f"Request to GET Item {item_id}")
+    item = session.get(Item, item_id)
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    logger.info(f"Item {item_id}: {item}")
+    return item
+
 
 @router.patch("/{item_id}", response_model=ItemPublic)
 def update_item(item_id: int, Item: ItemPublic, session: SessionDep):
