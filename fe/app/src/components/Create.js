@@ -15,14 +15,17 @@ const Create = () => {
 
   return (
     <>
-      <select value={selectedModel} onChange={handleModelSelect}>
-        <option value="">Select a Model to create</option>
-        {models.map((model, index) => (
-          <option key={index} value={model}>
-            {model}
-          </option>
-        ))}
-      </select>
+      <label>
+        Select a Model to create
+        <select value={selectedModel} onChange={handleModelSelect}>
+          <option value="">Select a Model</option>
+          {models.map((model, index) => (
+            <option key={index} value={model}>
+              {model}
+            </option>
+          ))}
+        </select>
+      </label>
       {selectedModel == "Item" ? <CreateItem /> : ""}
       {selectedModel == "Pocket" ? <CreatePocket /> : ""}
       {selectedModel == "Chest" ? <CreateChest /> : ""}
