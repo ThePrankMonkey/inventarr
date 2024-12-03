@@ -4,6 +4,7 @@ import "./App.css"; // Import your CSS styles
 import "./mvp.css"; // Import your CSS styles
 import NavBar from "./components/NavBar";
 import CreateItem from "./components/CreateItem";
+import Create from "./components/Create";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/createItem" element={<CreateItem />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </BrowserRouter>
     </>
