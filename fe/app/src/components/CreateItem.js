@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 
+import ListItemTypes from "./ListItemTypes";
 import ListRooms from "./ListRooms";
 import ListRoomChests from "./ListRoomChests";
 import ListChestPockets from "./ListChestPockets";
 
 const CreateItem = () => {
+  const [itemType, setItemType] = useState("");
   const [roomId, setRoomId] = useState("");
   const [chestId, setChestId] = useState("");
   const [formData, setFormData] = useState({
     name: "",
+    item_type: "",
     pocket_id: "",
     chest_id: "",
     room_id: "",
@@ -17,6 +20,13 @@ const CreateItem = () => {
     notes: "",
   });
 
+  const bubbleUpItemTypes = (value) => {
+    setItemType(value);
+    setFormData({
+      ...formData,
+      item_type: value,
+    });
+  };
   const bubbleUpRooms = (value) => {
     setRoomId(value);
     setFormData({
@@ -77,6 +87,10 @@ const CreateItem = () => {
               })
             }
           />
+        </label>
+        <label>
+          Select a room:
+          <ListItemTypes bubbleUp={bubbleUpItemTypes} />
         </label>
         <label>
           Enter a quantity:

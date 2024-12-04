@@ -52,7 +52,7 @@ def get_items_full(
 @router.get("/types", response_model=List[str])
 def get_item_types():
     logger.debug("Request to GET item types")
-    logger.info(item_types)
+    return item_types
 
 @router.get("/{item_id}")
 def get_item(item_id: int, session: SessionDep):
