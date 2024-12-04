@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css"; // Import your CSS styles
 import "./mvp.css"; // Import your CSS styles
 import NavBar from "./components/NavBar";
-import CreateItem from "./components/CreateItem";
+import View from "./components/View";
 import Create from "./components/Create";
+import Modify from "./components/Modify";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/createItem" element={<CreateItem />} />
+          <Route path="/view" element={<View />} />
           <Route path="/create" element={<Create />} />
+          <Route path="/modify" element={<Modify />} />
         </Routes>
       </BrowserRouter>
     </>
