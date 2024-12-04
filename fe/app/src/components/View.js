@@ -23,6 +23,7 @@ const View = () => {
             <th>Name</th>
             <th>ItemType</th>
             <th>Quantity</th>
+            <th>Unit</th>
             <th>Room</th>
             <th>Chest</th>
             <th>Pocket</th>
@@ -36,6 +37,7 @@ const View = () => {
               <td>{item.name}</td>
               <td>{item.item_type}</td>
               <td>{item.quantity}</td>
+              <td>{item.unit}</td>
               <td>{item.room.name}</td>
               <td>{item.chest.name}</td>
               <td>{item.pocket.name}</td>

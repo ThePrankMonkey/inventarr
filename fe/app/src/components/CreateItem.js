@@ -16,6 +16,7 @@ const CreateItem = () => {
     chest_id: "",
     room_id: "",
     quantity: 0,
+    unit: "",
     upc: "",
     notes: "",
   });
@@ -101,6 +102,19 @@ const CreateItem = () => {
               setFormData({
                 ...formData,
                 quantity: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Enter a unit:
+          <input
+            type="text"
+            value={formData.unit}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                unit: e.target.value,
               })
             }
           />

@@ -15,7 +15,8 @@ item_types = ["component", "ingredient", "tool"]
 class ItemBase(SQLModel):
     name: str = Field(index=True)
     item_type: str = Field(...)
-    quantity: int = Field()
+    quantity: int = Field(...)
+    unit: str = Field(...)
     pocket_id: int = Field(foreign_key="pocket.id")
     chest_id: int = Field(foreign_key="chest.id")
     room_id: int = Field(foreign_key="room.id")
