@@ -1,10 +1,10 @@
 import logging
-from typing import Annotated
-
+from typing import Annotated, List
 from fastapi import APIRouter, HTTPException, Query
 from sqlmodel import select
 from app.db import SessionDep
 from app.models.item.model import (
+    item_types,
     Item,
     ItemPublic,
     ItemPublicFull,
@@ -49,6 +49,10 @@ def get_items_full(
     items = session.exec(select(Item).offset(offset).limit(limit)).all()
     return items
 
+@router.get("/types", response_model=List[str])
+def get_item_types():
+    logger.debug("Request to GET item types")
+    logger.info(item_types)
 
 @router.get("/{item_id}")
 def get_item(item_id: int, session: SessionDep):
@@ -57,6 +61,7 @@ def get_item(item_id: int, session: SessionDep):
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
     logger.info(f"Item {item_id}: {item}")
+    logger.info(item_types)
     return item
 
 
