@@ -68,3 +68,67 @@ In case things get deleted, these are the steps I took:
      ```
 
 5. Edit `script.py.mako` with `import sqlmodel`. I put mine near `import sqlalchemy`.
+
+### How to upload image with Item?
+
+I don't think I should include the file in the DB. My research says the DB should just contain a file name and the actual file is stored on storage for the server.
+
+I'm thinking I'll perform two API calls on form submit. First, I upload the image and get a file name in the response. If that is successful, I'll include the file name in the POST for Item.
+
+Should I process out a thumbnail photo too? I can then add a link or BLOB call to get a photo to include in the View.
+
+- https://stackoverflow.com/questions/43692479/how-to-upload-an-image-in-react-js
+- https://stackoverflow.com/questions/72681390/how-to-upload-a-file-from-react-front-end-to-fastapi
+- https://www.tutorialspoint.com/fastapi/fastapi_uploading_files.htm
+
+Example Code:
+
+```python
+from fastapi import FastAPI, File, UploadFile
+
+app = FastAPI()
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    contents = await file.read()
+    # Do something with the file contents (e.g., save to disk, process it)
+    return {"filename": file.filename}
+```
+
+```js
+import React, { useState } from "react";
+
+function UploadForm() {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      const response = await fetch("/uploadfile/", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      console.log("File uploaded:", data);
+    } catch (error) {
+      console.error("Upload error:", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="file" onChange={handleFileChange} />
+      <button type="submit">Upload</button>
+    </form>
+  );
+}
+
+export default UploadForm;
+```
