@@ -10,7 +10,7 @@ from app.models.room.model import (Room, RoomPublic)
 ## Items ##
 ###########
 
-item_types = ["component", "ingredient", "tool"]
+item_types = ["component", "ingredient", "tool", "equipment"]
 
 class ItemBase(SQLModel):
     name: str = Field(index=True)
@@ -21,6 +21,7 @@ class ItemBase(SQLModel):
     chest_id: int = Field(foreign_key="chest.id")
     room_id: int = Field(foreign_key="room.id")
     upc: str | None = Field(default=None)
+    image_file : str | None = Field(default=None)
     notes: str | None = Field(default=None)
 
     @field_validator("item_type")
