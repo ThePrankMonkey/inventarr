@@ -3,3 +3,4 @@
 **/.envrc
 **/poetry.lock
 be/database.db
+be/migrations/versions
