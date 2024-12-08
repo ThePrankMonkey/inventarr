@@ -5,6 +5,7 @@ from sqlmodel import SQLModel, Field, Relationship
 ## Rooms ##
 ###########
 
+
 class RoomBase(SQLModel):
     name: str = Field(index=True)
     location: str

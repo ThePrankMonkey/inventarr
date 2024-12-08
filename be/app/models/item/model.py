@@ -1,9 +1,9 @@
 from enum import Enum
 from pydantic import field_validator
 from sqlmodel import SQLModel, Field, Relationship
-from app.models.pocket.model import (Pocket, PocketPublic)
-from app.models.chest.model import (Chest, ChestPublic)
-from app.models.room.model import (Room, RoomPublic)
+from app.models.pocket.model import Pocket, PocketPublic
+from app.models.chest.model import Chest, ChestPublic
+from app.models.room.model import Room, RoomPublic
 
 
 ###########
@@ -11,6 +11,7 @@ from app.models.room.model import (Room, RoomPublic)
 ###########
 
 item_types = ["component", "ingredient", "tool", "equipment"]
+
 
 class ItemBase(SQLModel):
     name: str = Field(index=True)
@@ -21,7 +22,7 @@ class ItemBase(SQLModel):
     chest_id: int = Field(foreign_key="chest.id")
     room_id: int = Field(foreign_key="room.id")
     upc: str | None = Field(default=None)
-    image_file : str | None = Field(default=None)
+    image_file: str | None = Field(default=None)
     notes: str | None = Field(default=None)
 
     @field_validator("item_type")
@@ -29,6 +30,7 @@ class ItemBase(SQLModel):
         if not v in item_types:
             raise ValueError(f"ItemType must be one of {item_types}")
         return v
+
 
 class Item(ItemBase, table=True):
     id: int | None = Field(default=None, primary_key=True)

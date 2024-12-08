@@ -37,6 +37,7 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
+
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
@@ -45,7 +46,4 @@ def on_startup():
 
 @app.get("/")
 def read_root():
-    return {
-        "Hello": "World",
-        "From": settings.app_name
-    }
+    return {"Hello": "World", "From": settings.app_name}

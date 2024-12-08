@@ -15,6 +15,7 @@ from app.models.pocket.model import Pocket
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/chests")
 
+
 @router.post("", response_model=ChestPublic)
 def create_chest(chest: ChestCreate, session: SessionDep):
     logger.debug("Request to POST chest with {chest}")
@@ -48,13 +49,15 @@ def get_chest(chest_id: int, session: SessionDep):
 
 @router.get("/{chest_id}/pockets")
 def get_chest_pockets(
-    chest_id: int, 
-    session: SessionDep, 
+    chest_id: int,
+    session: SessionDep,
     offset: int = 0,
     limit: Annotated[int, Query(le=100)] = 100,
 ):
     logger.debug(f"Request to GET Pockets located in Chest {chest_id}")
-    pockets = session.exec(select(Pocket).where(Pocket.chest_id == chest_id).offset(offset).limit(limit)).all()
+    pockets = session.exec(
+        select(Pocket).where(Pocket.chest_id == chest_id).offset(offset).limit(limit)
+    ).all()
     return pockets
 
 

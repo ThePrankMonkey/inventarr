@@ -6,6 +6,7 @@ from app.models.room.model import Room
 ## Chests ##
 ############
 
+
 class ChestBase(SQLModel):
     name: str = Field(index=True)
     room_id: int = Field(foreign_key="room.id")

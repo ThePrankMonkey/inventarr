@@ -14,6 +14,7 @@ from app.models.pocket.model import (
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/pockets")
 
+
 @router.post("", response_model=PocketPublic)
 def create_pocket(pocket: PocketCreate, session: SessionDep):
     logger.debug("Request to POST Pocket with {pocket}")
@@ -43,6 +44,7 @@ def get_pocket(pocket_id: int, session: SessionDep):
         raise HTTPException(status_code=404, detail="Pocket not found")
     logger.info(f"Pocket {pocket_id}: {Pocket}")
     return pocket
+
 
 @router.patch("/{pocket_id}", response_model=PocketPublic)
 def update_pocket(pocket_id: int, pocket: PocketPublic, session: SessionDep):

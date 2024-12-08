@@ -6,6 +6,7 @@ from app.models.chest.model import Chest
 ## Pocket ##
 ############
 
+
 class PocketBase(SQLModel):
     name: str = Field(index=True)
     location: str = Field()
@@ -17,7 +18,7 @@ class Pocket(PocketBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     items: list["Item"] = Relationship(back_populates="pocket")
     chest: Chest | None = Relationship(back_populates="pockets")
-    
+
 
 class PocketPublic(PocketBase):
     id: int

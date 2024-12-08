@@ -15,6 +15,7 @@ from app.models.chest.model import Chest
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/rooms")
 
+
 @router.post("", response_model=RoomPublic)
 def create_room(room: RoomCreate, session: SessionDep):
     logger.debug("Request to POST Room with {room}")
@@ -48,13 +49,15 @@ def get_room(room_id: int, session: SessionDep):
 
 @router.get("/{room_id}/chests")
 def get_room_chests(
-    room_id: int, 
-    session: SessionDep, 
+    room_id: int,
+    session: SessionDep,
     offset: int = 0,
     limit: Annotated[int, Query(le=100)] = 100,
 ):
     logger.debug(f"Request to GET Chests located in Room {room_id}")
-    chests = session.exec(select(Chest).where(Chest.room_id == room_id).offset(offset).limit(limit)).all()
+    chests = session.exec(
+        select(Chest).where(Chest.room_id == room_id).offset(offset).limit(limit)
+    ).all()
     return chests
 
 

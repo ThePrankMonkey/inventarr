@@ -18,6 +18,7 @@ from app.models.pocket.model import Pocket
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/items")
 
+
 @router.post("", response_model=ItemPublic)
 def create_item(item: ItemCreate, session: SessionDep):
     logger.debug("Request to POST item with {item}")
@@ -49,10 +50,12 @@ def get_items_full(
     items = session.exec(select(Item).offset(offset).limit(limit)).all()
     return items
 
+
 @router.get("/types", response_model=List[str])
 def get_item_types():
     logger.debug("Request to GET item types")
     return item_types
+
 
 @router.get("/{item_id}")
 def get_item(item_id: int, session: SessionDep):
