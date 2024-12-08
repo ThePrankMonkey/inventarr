@@ -4,6 +4,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .config import settings
 from .db import create_db_and_tables
 from .load_test_data import create_demo_data
 from .models.room.route import router as room_router
@@ -46,5 +47,5 @@ def on_startup():
 def read_root():
     return {
         "Hello": "World",
-        "From": "Inventarr"
-        }
+        "From": settings.app_name
+    }
