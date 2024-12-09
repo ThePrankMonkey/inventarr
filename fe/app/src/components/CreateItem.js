@@ -9,6 +9,7 @@ const CreateItem = () => {
   const [itemType, setItemType] = useState("");
   const [roomId, setRoomId] = useState("");
   const [chestId, setChestId] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     item_type: "",
@@ -19,6 +20,7 @@ const CreateItem = () => {
     unit: "",
     upc: "",
     notes: "",
+    image_file: "",
   });
 
   const bubbleUpItemTypes = (value) => {
@@ -48,27 +50,42 @@ const CreateItem = () => {
       pocket_id: value,
     });
   };
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const payload = formData;
-      console.log("Sending Payload: ", payload);
-      const response = await fetch(`http://127.0.0.1:5123/items/`, {
+      // Upload a file
+      const payloadFile = new FormData();
+      payloadFile.append("file", selectedFile);
+      console.log("Sending Payload File: ", payloadFile);
+      const responseFile = await fetch(`http://127.0.0.1:5123/items/photo`, {
+        method: "POST",
+        body: payloadFile,
+      });
+      const dataFile = await responseFile.json();
+      console.log(dataFile);
+      setFormData({
+        ...formData,
+        image_file: dataFile.image_file,
+      });
+      // Create an Item
+      const payloadItem = formData;
+      payloadItem.image_file = dataFile.image_file;
+      console.log("Sending Payload Item: ", payloadItem);
+      const responseItem = await fetch(`http://127.0.0.1:5123/items/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(payloadItem),
       });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      console.log(response.json());
-      //TODO Update Banner
-      //TODO Clear some fields like name, quantity, UPC, and notes. Leave room/chest/pocket.
+      const dataItem = await responseItem.json();
+      console.log(dataItem);
     } catch (error) {
-      // Handle errors (e.g., display an error message)
-      console.error("Error submitting form:", error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -166,6 +183,11 @@ const CreateItem = () => {
               })
             }
           />
+        </label>
+        <label>
+          Select an image:
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+          {selectedFile && <p>Selected file: {selectedFile.name}</p>}
         </label>
         <button type="submit">Submit</button>
       </form>
