@@ -56,7 +56,12 @@ class ItemCreate(ItemBase):
 
 class ItemUpdate(ItemBase):
     name: str | None = None
+    item_type: str | None = None
     quantity: int | None = None
     pocket_id: int | None = None
+    chest_id: int | None = None
+    room_id: int | None = None
+    unit: str | None = None
     upc: str | None = None
+    image_file: str | None = None
     notes: str | None = None

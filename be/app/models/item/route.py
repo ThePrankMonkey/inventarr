@@ -109,12 +109,12 @@ def get_item_photo(item_id: int, session: SessionDep):
 
 
 @router.patch("/{item_id}", response_model=ItemPublic)
-def update_item(item_id: int, Item: ItemPublic, session: SessionDep):
-    logger.debug(f"Request to PATCH Item {item_id} with {Item}")
+def update_item(item_id: int, item: ItemUpdate, session: SessionDep):
+    logger.debug(f"Request to PATCH Item {item_id} with {item}")
     db_item = session.get(Item, item_id)
     if not db_item:
         raise HTTPException(status_code=404, detail="Item not found")
-    item_data = Item.model_dump(exclude_unset=True)
+    item_data = item.model_dump(exclude_unset=True)
     db_item.sqlmodel_update(item_data)
     session.add(db_item)
     session.commit()
