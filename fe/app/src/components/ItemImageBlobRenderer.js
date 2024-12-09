@@ -20,7 +20,13 @@ const ItemImageBlobRenderer = ({ item }) => {
 
     fetchImage();
   }, []);
-  return <div>{imageUrl && <img src={imageUrl} alt="Fetched Image" />}</div>;
+  return (
+    <div>
+      {imageUrl && (
+        <img src={imageUrl} alt="Fetched Image" width="75" height="75" />
+      )}
+    </div>
+  );
 };
 
 export default ItemImageBlobRenderer;
