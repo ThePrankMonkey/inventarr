@@ -4,13 +4,13 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import settings
-from .db import create_db_and_tables
-from .load_test_data import create_demo_data
-from .models.room.route import router as room_router
-from .models.chest.route import router as chest_router
-from .models.pocket.route import router as pocket_router
-from .models.item.route import router as item_router
+from app.config import settings
+from app.db import create_db_and_tables
+from app.load_test_data import create_demo_data
+from app.models.room.route import router as room_router
+from app.models.chest.route import router as chest_router
+from app.models.pocket.route import router as pocket_router
+from app.models.item.route import router as item_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

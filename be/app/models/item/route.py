@@ -1,7 +1,13 @@
 import logging
+import os
+import shutil
 from typing import Annotated, List
-from fastapi import APIRouter, HTTPException, Query
+import uuid
+
+from fastapi import APIRouter, HTTPException, Query, File, UploadFile
 from sqlmodel import select
+
+from app.config import settings
 from app.db import SessionDep
 from app.models.item.model import (
     item_types,
@@ -27,6 +33,18 @@ def create_item(item: ItemCreate, session: SessionDep):
     session.commit()
     session.refresh(db_item)
     return db_item
+
+
+@router.post("/photo")
+def upload_photo(file: UploadFile = File(...)):
+    photo_name = f"{uuid.uuid4()}.png"
+    photo_path = os.path.join(settings.storage_path, photo_name)
+    try:
+        with open(photo_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        return {"image_file": photo_path}
+    except Exception as err:
+        raise HTTPException(status_code=500, detail="Unable to save image to disk.")
 
 
 @router.get("", response_model=list[ItemPublic])
@@ -90,3 +108,14 @@ def update_item(item_id: int, Item: ItemPublic, session: SessionDep):
     session.commit()
     session.refresh(db_item)
     return db_item
+
+
+@router.delete("/{item_id}")
+def delete_item(item_id: int, session: SessionDep):
+    logger.debug(f"Request to DELETE Item {item_id}")
+    db_item = session.get(Item, item_id)
+    if not db_item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    session.delete(db_item)
+    session.commit()
+    return {"message": f"Item {item_id} was deleted."}

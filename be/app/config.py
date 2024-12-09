@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 class Settings(BaseSettings):
     app_name: str = "Inventarr"
     database_url: str
+    storage_path: str
 
 
 class TestSettings(Settings):
@@ -18,7 +19,11 @@ class TestSettings(Settings):
 
 class DevSettings(Settings):
     database_url: str = "sqlite:///database.db"
-
+    current_directory:str = os.path.dirname(os.path.abspath(__file__))
+    storage_path: str = os.path.abspath(os.path.join(
+        current_directory,
+        "../photos",
+    ))
 
 class ProdSettings(Settings):
     database_url: str = ""
