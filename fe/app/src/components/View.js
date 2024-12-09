@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 
+import ItemImageBlobRenderer from "./ItemImageBlobRenderer";
+
 const View = () => {
   const [tableData, setTableData] = useState([]);
+
   useEffect(() => {
     // Fetch user data from an API
     const fetchItems = async () => {
@@ -13,12 +16,14 @@ const View = () => {
     };
     fetchItems();
   }, []);
+
   return (
     <>
       <h1>View Inventory</h1>
       <table>
         <thead>
           <tr>
+            <th>Thumbnail</th>
             <th>Id</th>
             <th>Name</th>
             <th>ItemType</th>
@@ -33,6 +38,9 @@ const View = () => {
         <tbody>
           {tableData.map((item, i) => (
             <tr key={i}>
+              <td>
+                <ItemImageBlobRenderer item={item} />
+              </td>
               <td>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.item_type}</td>
