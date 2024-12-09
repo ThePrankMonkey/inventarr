@@ -5,6 +5,7 @@ from typing import Annotated, List
 import uuid
 
 from fastapi import APIRouter, HTTPException, Query, File, UploadFile
+from fastapi.responses import FileResponse
 from sqlmodel import select
 
 from app.config import settings
@@ -94,6 +95,17 @@ def get_item_full(item_id: int, session: SessionDep):
         raise HTTPException(status_code=404, detail="Item not found")
     logger.info(f"Item {item_id}: {item}")
     return item
+
+
+@router.get("/{item_id}/photo")
+def get_item_photo(item_id: int, session: SessionDep):
+    logger.debug(f"Request to GET photo for Item {item_id}")
+    item = session.get(Item, item_id)
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    if not item.image_file:
+        raise HTTPException(status_code=404, detail="Item Image not found")
+    return FileResponse(item.image_file, media_type="image/jpeg")
 
 
 @router.patch("/{item_id}", response_model=ItemPublic)
