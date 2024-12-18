@@ -6,6 +6,7 @@ import uuid
 
 from fastapi import APIRouter, HTTPException, Query, File, UploadFile
 from fastapi.responses import FileResponse
+from PIL import Image
 from sqlmodel import select
 
 from app.config import settings
@@ -38,12 +39,22 @@ def create_item(item: ItemCreate, session: SessionDep):
 
 @router.post("/photo")
 def upload_photo(file: UploadFile = File(...)):
-    photo_name = f"{uuid.uuid4()}.png"
-    photo_path = os.path.join(settings.storage_path, photo_name)
+    photo_name = f"{uuid.uuid4()}"
+    photo_ext = "png"
+    photo_path = os.path.join(settings.storage_path, f"{photo_name}.{photo_ext}")
+    tumbnail_path = os.path.join(settings.storage_path, f"{photo_name}-thumb.{photo_ext}")
     try:
+        # copy file to storage
         with open(photo_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
-        return {"image_file": photo_path}
+        # create thumbnail
+        img = Image.open(photo_path)
+        img.thumbnail(settings.thumbnail_size)
+        img.save(tumbnail_path)
+        return {
+            "image_file": photo_path,
+            "thumb_file": tumbnail_path
+        }
     except Exception as err:
         raise HTTPException(status_code=500, detail="Unable to save image to disk.")
 

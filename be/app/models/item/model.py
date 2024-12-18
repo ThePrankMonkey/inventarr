@@ -23,6 +23,7 @@ class ItemBase(SQLModel):
     room_id: int = Field(foreign_key="room.id")
     upc: str | None = Field(default=None)
     image_file: str | None = Field(default=None)
+    thumb_file: str | None = Field(default=None)
     notes: str | None = Field(default=None)
 
     @field_validator("item_type")
@@ -64,4 +65,5 @@ class ItemUpdate(ItemBase):
     unit: str | None = None
     upc: str | None = None
     image_file: str | None = None
+    thumb_file: str | None = None
     notes: str | None = None

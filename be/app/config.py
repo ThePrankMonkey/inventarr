@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     app_name: str = "Inventarr"
     database_url: str
     storage_path: str
+    thumbnail_size: tuple = (75,75)
 
 
 class TestSettings(Settings):
