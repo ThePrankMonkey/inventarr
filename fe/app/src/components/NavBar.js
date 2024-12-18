@@ -7,6 +7,7 @@ const NavBar = () => {
       <Link to="/view">View Inventory</Link>
       <Link to="/create">Create</Link>
       <Link to="/modify">Modify</Link>
+      <Link to="/delete">Delete</Link>
     </nav>
   );
 };

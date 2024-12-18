@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import View from "./components/View";
 import Create from "./components/Create";
 import Modify from "./components/Modify";
+import Delete from "./components/Delete";
 
 function App() {
   return (
@@ -13,9 +14,11 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
+          <Route path="/" element={<View />} />
           <Route path="/view" element={<View />} />
           <Route path="/create" element={<Create />} />
           <Route path="/modify" element={<Modify />} />
+          <Route path="/delete" element={<Delete />} />
         </Routes>
       </BrowserRouter>
     </>
