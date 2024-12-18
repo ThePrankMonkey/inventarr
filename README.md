@@ -29,13 +29,16 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Delete
 - [ ] Advance Backend
   - [x] Upload/Retrieve images on Items
-  - [ ] Create Thumbnails
+  - [x] Create Thumbnails
+  - [ ] Copy Chests
   - [ ] ???
-- [ ] Advance Frontend
+- [ ] Advanced Frontend
   - [x] Show photos in table
   - [ ] Search fields in tables
   - [ ] Sortable table
   - [ ] Inventory checks
+  - [ ] Support Create Thumbnails
+  - [ ] Support Copy Chests
   - [ ] ???
 - [ ] Use/Restock
   - [ ] Work on Unit Conversions
