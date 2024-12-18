@@ -30,5 +30,5 @@ EXPOSE 3000
 
 # Start the React app
 
-CMD ["npm", "start"]
+CMD ["npm", "start", "--prefix", "/app/app"]
 # CMD ["tail", "-f", "/dev/null"]
