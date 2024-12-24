@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import config from "../config";
+
 const ListItemTypes = ({ bubbleUp }) => {
   const [itemTypes, setItemTypes] = useState([]);
   const [selectedItemType, setSelectedItemType] = useState(""); // Selected user from dropdown
@@ -7,7 +9,7 @@ const ListItemTypes = ({ bubbleUp }) => {
   useEffect(() => {
     // Fetch user data from an API
     const fetchItemTypes = async () => {
-      const response = await fetch("http://127.0.0.1:5123/items/types");
+      const response = await fetch(`${config.BACKEND_URL}/items/types`);
       // console.log(response);
       const data = await response.json();
       console.log(data);

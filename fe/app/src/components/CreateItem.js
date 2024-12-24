@@ -4,6 +4,7 @@ import ListItemTypes from "./ListItemTypes";
 import ListRooms from "./ListRooms";
 import ListRoomChests from "./ListRoomChests";
 import ListChestPockets from "./ListChestPockets";
+import config from "../config";
 
 const CreateItem = () => {
   const [itemType, setItemType] = useState("");
@@ -61,7 +62,7 @@ const CreateItem = () => {
       const payloadFile = new FormData();
       payloadFile.append("file", selectedFile);
       console.log("Sending Payload File: ", payloadFile);
-      const responseFile = await fetch(`http://127.0.0.1:5123/items/photo`, {
+      const responseFile = await fetch(`${config.BACKEND_URL}/items/photo`, {
         method: "POST",
         body: payloadFile,
       });
@@ -75,7 +76,7 @@ const CreateItem = () => {
       const payloadItem = formData;
       payloadItem.image_file = dataFile.image_file;
       console.log("Sending Payload Item: ", payloadItem);
-      const responseItem = await fetch(`http://127.0.0.1:5123/items/`, {
+      const responseItem = await fetch(`${config.BACKEND_URL}/items/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

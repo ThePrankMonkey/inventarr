@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import config from "../config";
+
 const ListRooms = ({ bubbleUp }) => {
   const [rooms, setRooms] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(""); // Selected user from dropdown
@@ -7,7 +9,7 @@ const ListRooms = ({ bubbleUp }) => {
   useEffect(() => {
     // Fetch user data from an API
     const fetchRooms = async () => {
-      const response = await fetch("http://127.0.0.1:5123/rooms");
+      const response = await fetch(`${config.BACKEND_URL}/rooms`);
       // console.log(response);
       const data = await response.json();
       // console.log(data);

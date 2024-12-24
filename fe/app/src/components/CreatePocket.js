@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import ListRooms from "./ListRooms";
 import ListRoomChests from "./ListRoomChests";
+import config from "../config";
 
 const CreatePocket = () => {
   const [roomId, setRoomId] = useState("");
@@ -32,7 +33,7 @@ const CreatePocket = () => {
     try {
       const payload = formData;
       console.log("Sending Payload: ", payload);
-      const response = await fetch(`http://127.0.0.1:5123/pockets/`, {
+      const response = await fetch(`${config.BACKEND_URL}/pockets/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

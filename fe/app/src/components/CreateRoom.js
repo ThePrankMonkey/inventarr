@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import config from "../config";
 
 const CreateRoom = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const CreateRoom = () => {
     try {
       const payload = formData;
       console.log("Sending Payload: ", payload);
-      const response = await fetch(`http://127.0.0.1:5123/rooms/`, {
+      const response = await fetch(`${config.BACKEND_URL}/rooms/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

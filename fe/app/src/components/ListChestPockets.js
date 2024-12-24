@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import config from "../config";
+
 const ListChestPockets = ({ chestId, bubbleUp }) => {
   const [pockets, setpockets] = useState([]);
   const [selectedPocket, setSelectedPocket] = useState(""); // Selected user from dropdown
@@ -8,7 +10,7 @@ const ListChestPockets = ({ chestId, bubbleUp }) => {
     // Fetch user data from an API
     const fetchPokets = async () => {
       const response = await fetch(
-        `http://127.0.0.1:5123/chests/${chestId}/pockets`
+        `${config.BACKEND_URL}/chests/${chestId}/pockets`
       );
       console.log(response);
       const data = await response.json();

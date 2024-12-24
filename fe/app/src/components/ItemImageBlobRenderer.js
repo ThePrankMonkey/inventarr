@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import config from "../config";
+
 const ItemImageBlobRenderer = ({ item }) => {
   const [imageUrl, setImageUrl] = useState(null);
 
@@ -8,7 +10,7 @@ const ItemImageBlobRenderer = ({ item }) => {
       try {
         console.log("Trying to grab image for item ", item);
         const response = await fetch(
-          `http://127.0.0.1:5123/items/${item.id}/photo`
+          `${config.IMAGE_URL}/items/${item.id}/photo`
         );
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);

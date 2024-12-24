@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import ItemImageBlobRenderer from "./ItemImageBlobRenderer";
+import config from "../config";
 
 const View = () => {
   const [tableData, setTableData] = useState([]);
@@ -8,7 +9,9 @@ const View = () => {
   useEffect(() => {
     // Fetch user data from an API
     const fetchItems = async () => {
-      const response = await fetch("http://127.0.0.1:5123/items/full");
+      const url = `${config.BACKEND_URL}/items/full`;
+      console.log(url);
+      const response = await fetch(`${config.BACKEND_URL}/items/full`);
       // console.log(response);
       const data = await response.json();
       // console.log(data);

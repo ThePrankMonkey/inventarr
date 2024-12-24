@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import config from "../config";
+
 const ListRoomChests = ({ roomId, bubbleUp }) => {
   const [chests, setChests] = useState([]);
   const [selectedChest, setSelectedChest] = useState(""); // Selected user from dropdown
@@ -8,7 +10,7 @@ const ListRoomChests = ({ roomId, bubbleUp }) => {
     // Fetch user data from an API
     const fetchChests = async () => {
       const response = await fetch(
-        `http://127.0.0.1:5123/rooms/${roomId}/chests`
+        `${config.BACKEND_URL}/rooms/${roomId}/chests`
       );
       console.log(response);
       const data = await response.json();

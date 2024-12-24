@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import ListRooms from "./ListRooms";
 import ListRoomChests from "./ListRoomChests";
+import config from "../config";
 
 const CreateChest = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const CreateChest = () => {
     try {
       const payload = formData;
       console.log("Sending Payload: ", payload);
-      const response = await fetch(`http://127.0.0.1:5123/chests/`, {
+      const response = await fetch(`${config.BACKEND_URL}/chests/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
