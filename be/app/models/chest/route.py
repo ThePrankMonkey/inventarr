@@ -10,9 +10,10 @@ from app.models.chest.model import (
     ChestCreate,
     ChestUpdate,
 )
-from app.models.pocket.model import Pocket
+from app.models.pocket.model import Pocket, PocketCreate
 
 logger = logging.getLogger(__name__)
+
 router = APIRouter(prefix="/chests")
 
 
@@ -21,6 +22,31 @@ def create_chest(chest: ChestCreate, session: SessionDep):
     logger.debug("Request to POST chest with {chest}")
     db_chest = Chest.model_validate(chest)
     session.add(db_chest)
+    session.commit()
+    session.refresh(db_chest)
+    return db_chest
+
+
+@router.post("/{chest_id}/copy", response_model=ChestPublic)
+def create_chest_copy(chest_id: int, chest: ChestCreate, session: SessionDep):
+    logger.debug("Request to POST copy chest {chest_id} with {chest}")
+    db_chest = Chest.model_validate(chest)
+    session.add(db_chest)
+    session.commit()
+    session.refresh(db_chest)
+    original_chest = session.get(Chest, chest_id)
+    old_pockets = original_chest.pockets
+    logger.debug(f"Found: {old_pockets}")
+    for old_pocket in old_pockets:
+        logger.debug(f"Duplicating pocket {old_pocket}")
+        # copy old pocket to a new pocket
+        new_pocket = PocketCreate.model_validate(old_pocket)
+        db_pocket = Pocket.model_validate(new_pocket)
+        logger.debug(f"New pocket {db_pocket}")
+        # set the chest_id to the new chest
+        db_pocket.chest_id = db_chest.id
+        logger.debug(f"Adding duplicated pocket {db_pocket}")
+        session.add(db_pocket)
     session.commit()
     session.refresh(db_chest)
     return db_chest
@@ -73,3 +99,15 @@ def update_chest(chest_id: int, chest: ChestPublic, session: SessionDep):
     session.commit()
     session.refresh(db_chest)
     return db_chest
+
+
+@router.delete("/{chest_id}")
+def delete_chest(chest_id: int, session: SessionDep):
+    logger.debug(f"Request to DELETE Chest {chest_id}")
+    db_chest = session.get(Chest, chest_id)
+    if not db_chest:
+        raise HTTPException(status_code=404, detail="Item not found")
+    #TODO: Add checks/logic for pockets being deleted first
+    session.delete(db_chest)
+    session.commit()
+    return {"message": f"Chest {chest_id} was deleted."}

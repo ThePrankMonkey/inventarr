@@ -30,6 +30,17 @@ http GET http://127.0.0.1:5123/pockets
 http GET http://127.0.0.1:5123/items
 ```
 
+### Delete Items
+
+http GET http://127.0.0.1:5123/items
+http DELETE http://127.0.0.1:5123/items/3
+http GET http://127.0.0.1:5123/chests
+http DELETE http://127.0.0.1:5123/chests/3
+
+### Duplicate Chest
+
+http POST http://127.0.0.1:5123/chests/1/copy name="Component 2" room_id=1
+
 ## Issues
 
 ### How to do a migration with SQLModel?
