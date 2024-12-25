@@ -31,7 +31,7 @@ I'm also considering this to be a fun way to practice some React.
 - [ ] Advanced Backend
   - [x] Upload/Retrieve images on Items
   - [x] Create Thumbnails
-  - [ ] Copy Chests (Create a duplicate with same count and types of pockets, but new ids)
+  - [x] Copy Chests (Create a duplicate with same count and types of pockets, but new ids)
   - [ ] ???
 - [ ] Advanced Frontend
   - [x] Show photos in table
