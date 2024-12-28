@@ -2,8 +2,11 @@ import logging
 from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import FileResponse
 from sqlmodel import select
+
 from app.db import SessionDep
+from app.helpers.label_maker import make_label
 from app.models.chest.model import (
     Chest,
     ChestPublic,
@@ -73,6 +76,29 @@ def get_chest(chest_id: int, session: SessionDep):
     return chest
 
 
+@router.get("/{chest_id}/label")
+def get_chest_label(
+    chest_id: int,
+    session: SessionDep,
+    offset: int = 0,
+    limit: Annotated[int, Query(le=100)] = 100,
+):
+    logger.debug(f"Request to GET Label for Chest {chest_id}")
+    chest = session.get(Chest, chest_id)
+    if not chest:
+        raise HTTPException(status_code=404, detail="Chest not found")
+    label = make_label(
+        entry_type="chest",
+        entry_id=chest.id,
+        width=2.5,
+        height=1.0,
+        message="",
+    )
+    label_path = "/tmp/label.png"
+    label.save(label_path)
+    return FileResponse(label_path, media_type="image/png")
+
+
 @router.get("/{chest_id}/pockets")
 def get_chest_pockets(
     chest_id: int,
@@ -107,7 +133,7 @@ def delete_chest(chest_id: int, session: SessionDep):
     db_chest = session.get(Chest, chest_id)
     if not db_chest:
         raise HTTPException(status_code=404, detail="Item not found")
-    #TODO: Add checks/logic for pockets being deleted first
+    # TODO: Add checks/logic for pockets being deleted first
     session.delete(db_chest)
     session.commit()
     return {"message": f"Chest {chest_id} was deleted."}

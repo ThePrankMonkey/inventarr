@@ -1,6 +1,30 @@
-# Issues
+## Features
 
-## pymongo.errors.OperationFailure: Authentication failed.
+### Create Labels
+
+New dependencies:
+
+```bash
+docker compose exec be poetry add pillow
+docker compose exec be poetry add segno
+docker compose exec be poetry add qrcode-artistic
+```
+
+I need to create images for the labels that will be printed. I need to have a global maximum width for the images, as well as have each chest and pocket listing a local area I can make use for generating labels.
+
+I want to include a QR code that I can later scan in to look up things. For the QR data, I have two major plans...
+
+- generate a uuid for each item
+- use the type and id to make a unique id.
+  - I prefer the as I can look up things faster.
+
+Research:
+
+- https://realpython.com/python-generate-qr-code/#using-python-to-generate-a-basic-qr-code
+
+## Issues
+
+### pymongo.errors.OperationFailure: Authentication failed.
 
 ```
 pymongo.errors.OperationFailure: Authentication failed., full error: {'ok': 0.0, 'errmsg': 'Authentication failed.', 'code': 18, 'codeName': 'AuthenticationFailed'}
@@ -14,7 +38,7 @@ MONGODB_URL: "mongodb://root:example@db:27017/dev?authSource=admin&retryWrites=t
 
 - https://stackoverflow.com/questions/72048051/pymongo-auth-failure-ok-0-0-errmsg-authentication-failed-code-18
 
-## ValueError: [TypeError("'ObjectId' object is not iterable")
+### ValueError: [TypeError("'ObjectId' object is not iterable")
 
 ```
 ValueError: [TypeError("'ObjectId' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')]

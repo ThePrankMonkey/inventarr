@@ -42,7 +42,9 @@ def upload_photo(file: UploadFile = File(...)):
     photo_name = f"{uuid.uuid4()}"
     photo_ext = "png"
     photo_path = os.path.join(settings.storage_path, f"{photo_name}.{photo_ext}")
-    tumbnail_path = os.path.join(settings.storage_path, f"{photo_name}-thumb.{photo_ext}")
+    tumbnail_path = os.path.join(
+        settings.storage_path, f"{photo_name}-thumb.{photo_ext}"
+    )
     try:
         # copy file to storage
         with open(photo_path, "wb") as buffer:
@@ -51,10 +53,7 @@ def upload_photo(file: UploadFile = File(...)):
         img = Image.open(photo_path)
         img.thumbnail(settings.thumbnail_size)
         img.save(tumbnail_path)
-        return {
-            "image_file": photo_path,
-            "thumb_file": tumbnail_path
-        }
+        return {"image_file": photo_path, "thumb_file": tumbnail_path}
     except Exception as err:
         raise HTTPException(status_code=500, detail="Unable to save image to disk.")
 

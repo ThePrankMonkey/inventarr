@@ -46,4 +46,6 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Use Ingredients/Components
   - [ ] Restock Ingredients/Components
 - [ ] Integrate Barcode Printer
+  - https://www.brother-usa.com/products/ql600 ???
+  - [ ] Create Labels
 - [ ] Integrate Barcode Scanner

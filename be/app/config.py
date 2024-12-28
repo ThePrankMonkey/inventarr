@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     database_url: str
     storage_path: str
     thumbnail_size: tuple = (75,75)
+    max_label_width_inches: float = 2.5
 
 
 class TestSettings(Settings):

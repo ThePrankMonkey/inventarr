@@ -13,6 +13,7 @@ from app.models.pocket.route import router as pocket_router
 from app.models.item.route import router as item_router
 
 logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
@@ -46,4 +47,8 @@ def on_startup():
 
 @app.get("/")
 def read_root():
+    return {"Hello": "World", "From": settings.app_name}
+
+@app.get("/test_label")
+def make_tesT_label():
     return {"Hello": "World", "From": settings.app_name}
