@@ -58,13 +58,30 @@ docker compose exec be alembic revision --autogenerate -m "SOME_MESSAGE"
 docker compose exec be alembic upgrade head
 ```
 
-I'll dabble with a `.envrc` function.
+I'll dabble with a `.envrc` function. BAH! I Forgot that `export_function` doesn't pass things in correctly...
 
 ```bash
 function migrate(){
-    docker compose exec be alembic revision --autogenerate -m "$1"
+    local message="$1"
+    echo "$message"
+    # Check if the string is empty
+    if [[ -z "$message" ]]; then
+        echo "Error: Empty message provided." >&2
+        exit 1
+    fi
+    # perform db migration
+    docker compose exec be alembic revision --autogenerate -m "$message"
     docker compose exec be alembic upgrade head
 }
+```
+
+In addition, I may need to set a `server_default` directly when performing a migration. Here's an example:
+
+```python
+op.add_column(
+    "chest",
+    sa.Column("label_width", sa.Float(), nullable=False, server_default="0.0"),
+)
 ```
 
 In case things get deleted, these are the steps I took:

@@ -1,5 +1,6 @@
 **/__pycache__
 
+**/.direnv
 **/.envrc
 **/poetry.lock
 be/database.db

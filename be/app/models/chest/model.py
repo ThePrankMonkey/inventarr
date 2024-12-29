@@ -9,6 +9,8 @@ from app.models.room.model import Room
 
 class ChestBase(SQLModel):
     name: str = Field(index=True)
+    label_width: float = Field(default=0)  # in_inches
+    label_height: float = Field(default=0)  # in_inches
     room_id: int = Field(foreign_key="room.id")
 
 
