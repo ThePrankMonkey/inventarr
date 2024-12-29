@@ -6,13 +6,23 @@ from pydantic_settings import BaseSettings
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
 
 class Settings(BaseSettings):
     app_name: str = "Inventarr"
     database_url: str
     storage_path: str
-    thumbnail_size: tuple = (75,75)
-    max_label_width_inches: float = 2.5
+    thumbnail_size: tuple = (75, 75)
+    printer_max_label_width_inches: float = 2.5
+    printer_dpi: int = 300
+    font_path: str = os.path.abspath(
+        os.path.join(
+            current_directory,
+            "../fonts",
+        )
+    )
+    label_font_path: str = os.path.join(font_path, "FreeMonoBold.ttf")
 
 
 class TestSettings(Settings):
@@ -21,11 +31,13 @@ class TestSettings(Settings):
 
 class DevSettings(Settings):
     database_url: str = "sqlite:///database.db"
-    current_directory:str = os.path.dirname(os.path.abspath(__file__))
-    storage_path: str = os.path.abspath(os.path.join(
-        current_directory,
-        "../photos",
-    ))
+    storage_path: str = os.path.abspath(
+        os.path.join(
+            current_directory,
+            "../photos",
+        )
+    )
+
 
 class ProdSettings(Settings):
     database_url: str = ""

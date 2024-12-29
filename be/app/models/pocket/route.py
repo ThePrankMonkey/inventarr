@@ -2,8 +2,11 @@ import logging
 from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import FileResponse
 from sqlmodel import select
+
 from app.db import SessionDep
+from app.helpers.label_maker import make_label
 from app.models.pocket.model import (
     Pocket,
     PocketPublic,
@@ -44,6 +47,26 @@ def get_pocket(pocket_id: int, session: SessionDep):
         raise HTTPException(status_code=404, detail="Pocket not found")
     logger.info(f"Pocket {pocket_id}: {Pocket}")
     return pocket
+
+
+@router.get("/{pocket_id}/label")
+def get_pocket_label(
+    pocket_id: int,
+    session: SessionDep,
+):
+    logger.debug(f"Request to GET Label for Pocket {pocket_id}")
+    pocket = session.get(Pocket, pocket_id)
+    if not pocket:
+        raise HTTPException(status_code=404, detail="Pocket not found")
+    logger.info(f"Pocket {pocket_id}: {Pocket}")
+    label_path = make_label(
+        entry_type="pocket",
+        entry_id=pocket.id,
+        width=2.5,
+        height=1.0,
+        message=pocket.location,
+    )
+    return FileResponse(label_path, media_type="image/png")
 
 
 @router.patch("/{pocket_id}", response_model=PocketPublic)

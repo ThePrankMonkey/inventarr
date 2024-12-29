@@ -80,22 +80,18 @@ def get_chest(chest_id: int, session: SessionDep):
 def get_chest_label(
     chest_id: int,
     session: SessionDep,
-    offset: int = 0,
-    limit: Annotated[int, Query(le=100)] = 100,
 ):
     logger.debug(f"Request to GET Label for Chest {chest_id}")
     chest = session.get(Chest, chest_id)
     if not chest:
         raise HTTPException(status_code=404, detail="Chest not found")
-    label = make_label(
+    label_path = make_label(
         entry_type="chest",
         entry_id=chest.id,
         width=2.5,
         height=1.0,
-        message="",
+        message=chest.name,
     )
-    label_path = "/tmp/label.png"
-    label.save(label_path)
     return FileResponse(label_path, media_type="image/png")
 
 
