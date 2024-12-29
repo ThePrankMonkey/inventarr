@@ -85,11 +85,14 @@ def get_chest_label(
     chest = session.get(Chest, chest_id)
     if not chest:
         raise HTTPException(status_code=404, detail="Chest not found")
+    # TODO: Account for too wide label
+    if chest.label_width == 0 or chest.label_height == 0:
+        raise HTTPException(status_code=500, detail="Chest label size invalid")
     label_path = make_label(
         entry_type="chest",
         entry_id=chest.id,
-        width=2.5,
-        height=1.0,
+        width=chest.label_width,
+        height=chest.label_height,
         message=chest.name,
     )
     return FileResponse(label_path, media_type="image/png")

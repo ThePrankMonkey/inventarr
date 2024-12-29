@@ -58,12 +58,14 @@ def get_pocket_label(
     pocket = session.get(Pocket, pocket_id)
     if not pocket:
         raise HTTPException(status_code=404, detail="Pocket not found")
-    logger.info(f"Pocket {pocket_id}: {Pocket}")
+    # TODO: Account for too wide label
+    if pocket.label_width == 0 or pocket.label_height == 0:
+        raise HTTPException(status_code=500, detail="Pocket label size invalid")
     label_path = make_label(
         entry_type="pocket",
         entry_id=pocket.id,
-        width=2.5,
-        height=1.0,
+        width=pocket.label_width,
+        height=pocket.label_height,
         message=pocket.location,
     )
     return FileResponse(label_path, media_type="image/png")
