@@ -12,6 +12,8 @@ const CreatePocket = () => {
     location: "",
     chest_id: "",
     room_id: "",
+    label_width: 0,
+    label_height: 0,
   });
 
   const bubbleUpRooms = (value) => {
@@ -93,6 +95,34 @@ const CreatePocket = () => {
           ) : (
             <p>"Please select a room first"</p>
           )}
+        </label>
+        <label>
+          Enter a Label Width (in inches):
+          <input
+            type="number"
+            step="any"
+            value={formData.label_width}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                label_width: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Enter a Label Height (in inches):
+          <input
+            type="number"
+            step="any"
+            value={formData.label_height}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                label_height: e.target.value,
+              })
+            }
+          />
         </label>
         <button type="submit">Submit</button>
       </form>

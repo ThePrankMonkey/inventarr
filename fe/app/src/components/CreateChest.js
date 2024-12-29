@@ -9,6 +9,8 @@ const CreateChest = () => {
     name: "",
     location: "",
     room_id: "",
+    label_width: 0,
+    label_height: 0,
   });
 
   const bubbleUpRooms = (value) => {
@@ -68,6 +70,34 @@ const CreateChest = () => {
               setFormData({
                 ...formData,
                 location: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Enter a Label Width (in inches):
+          <input
+            type="number"
+            step="any"
+            value={formData.label_width}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                label_width: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Enter a Label Height (in inches):
+          <input
+            type="number"
+            step="any"
+            value={formData.label_height}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                label_height: e.target.value,
               })
             }
           />
