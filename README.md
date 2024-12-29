@@ -32,6 +32,11 @@ I'm also considering this to be a fun way to practice some React.
   - [x] Upload/Retrieve images on Items
   - [x] Create Thumbnails
   - [x] Copy Chests (Create a duplicate with same count and types of pockets, but new ids)
+  - [ ] Support Labels
+    - [x] Generate QR Code
+    - [x] Generate Message
+    - [ ] Handle min/max for labels
+    - [ ] Handle text resizing
   - [ ] ???
 - [ ] Advanced Frontend
   - [x] Show photos in table
@@ -40,12 +45,17 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Inventory checks
   - [ ] Support Create Thumbnails
   - [ ] Support Copy Chests
+  - [ ] Support Labels
+    - [x] Update Create
+    - [ ] Update Modify
+    - [ ] Handle min/max for labels
   - [ ] ???
 - [ ] Use/Restock
   - [ ] Work on Unit Conversions
   - [ ] Use Ingredients/Components
   - [ ] Restock Ingredients/Components
 - [ ] Integrate Barcode Printer
-  - https://www.brother-usa.com/products/ql600 ???
-  - [ ] Create Labels
+  - [ ] Research Printers
+    - https://www.brother-usa.com/products/ql600 ???
+  - [x] Create Labels
 - [ ] Integrate Barcode Scanner
