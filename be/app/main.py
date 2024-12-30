@@ -48,7 +48,3 @@ def on_startup():
 @app.get("/")
 def read_root():
     return {"Hello": "World", "From": settings.app_name}
-
-@app.get("/test_label")
-def make_tesT_label():
-    return {"Hello": "World", "From": settings.app_name}
