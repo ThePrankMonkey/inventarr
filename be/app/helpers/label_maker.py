@@ -1,3 +1,4 @@
+import json
 import logging
 from tempfile import NamedTemporaryFile
 from typing import Literal
@@ -8,6 +9,16 @@ import segno
 from app.config import settings
 
 logger = logging.getLogger(__name__)
+
+QR_SCALE = 3
+
+
+def generate_qr_data(entry_type: str, entry_id: int) -> str:
+    data = {
+        "type": entry_type,
+        "id": entry_id,
+    }
+    return json.dumps(data)
 
 
 def make_label(
@@ -33,9 +44,12 @@ def make_label(
     canvas.text((0, 0), message, font=font, fill="black")
     # create QR portion
     logger.info("Create label qr")
-    qr_data = f"{entry_type}/{entry_id}"
+    qr_data = generate_qr_data(
+        entry_type=entry_type,
+        entry_id=entry_id,
+    )
     qrcode = segno.make(qr_data)
-    qr_image = qrcode.to_pil(scale=5)
+    qr_image = qrcode.to_pil(scale=QR_SCALE)
     logger.info(f"QR is {qr_image.size}")
     # combine
     logger.info("Combine label parts")
