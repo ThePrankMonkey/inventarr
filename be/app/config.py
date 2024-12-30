@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     database_url: str
     storage_path: str
     thumbnail_size: tuple = (75, 75)
+    qr_scale: int = 3
     printer_max_label_width_inches: float = 2.5
     printer_dpi: int = 300
     font_path: str = os.path.abspath(

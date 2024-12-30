@@ -10,7 +10,7 @@ from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-QR_SCALE = 3
+QR_SCALE = settings.qr_scale
 
 
 def generate_qr_data(entry_type: str, entry_id: int) -> str:
