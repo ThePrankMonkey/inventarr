@@ -20,6 +20,7 @@ qrcode-artistic = "^3.0.2"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 black = "^24.10.0"
+pytest-cov = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -27,3 +28,14 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = "app.start:run"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+    # "integration",
+]
+
+[tool.coverage.run]
+omit = [
+    "/usr/lib/*",
+]
