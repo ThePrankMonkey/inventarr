@@ -1,7 +1,7 @@
 import logging
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, status
 from fastapi.responses import FileResponse
 from sqlmodel import select
 
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/chests")
 
 
-@router.post("", response_model=ChestPublic)
+@router.post("", response_model=ChestPublic, status_code=status.HTTP_201_CREATED)
 def create_chest(chest: ChestCreate, session: SessionDep):
     logger.debug("Request to POST chest with {chest}")
     db_chest = Chest.model_validate(chest)
@@ -30,7 +30,9 @@ def create_chest(chest: ChestCreate, session: SessionDep):
     return db_chest
 
 
-@router.post("/{chest_id}/copy", response_model=ChestPublic)
+@router.post(
+    "/{chest_id}/copy", response_model=ChestPublic, status_code=status.HTTP_201_CREATED
+)
 def create_chest_copy(chest_id: int, chest: ChestCreate, session: SessionDep):
     logger.debug("Request to POST copy chest {chest_id} with {chest}")
     db_chest = Chest.model_validate(chest)

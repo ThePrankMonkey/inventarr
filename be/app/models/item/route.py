@@ -4,7 +4,7 @@ import shutil
 from typing import Annotated, List
 import uuid
 
-from fastapi import APIRouter, HTTPException, Query, File, UploadFile
+from fastapi import APIRouter, HTTPException, Query, File, UploadFile, status
 from fastapi.responses import FileResponse
 from PIL import Image
 from sqlmodel import select
@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/items")
 
 
-@router.post("", response_model=ItemPublic)
+@router.post("", response_model=ItemPublic, status_code=status.HTTP_201_CREATED)
 def create_item(item: ItemCreate, session: SessionDep):
     logger.debug("Request to POST item with {item}")
     db_item = Item.model_validate(item)
@@ -37,7 +37,7 @@ def create_item(item: ItemCreate, session: SessionDep):
     return db_item
 
 
-@router.post("/photo")
+@router.post("/photo", status_code=status.HTTP_201_CREATED)
 def upload_photo(file: UploadFile = File(...)):
     photo_name = f"{uuid.uuid4()}"
     photo_ext = "png"

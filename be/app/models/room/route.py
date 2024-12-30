@@ -1,7 +1,7 @@
 import logging
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, status
 from sqlmodel import select
 from app.db import SessionDep
 from app.models.room.model import (
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/rooms")
 
 
-@router.post("", response_model=RoomPublic)
+@router.post("", response_model=RoomPublic, status_code=status.HTTP_201_CREATED)
 def create_room(room: RoomCreate, session: SessionDep):
     logger.debug("Request to POST Room with {room}")
     db_room = Room.model_validate(room)

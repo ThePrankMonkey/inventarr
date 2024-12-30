@@ -1,7 +1,7 @@
 import logging
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, status
 from fastapi.responses import FileResponse
 from sqlmodel import select
 
@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/pockets")
 
 
-@router.post("", response_model=PocketPublic)
+@router.post("", response_model=PocketPublic, status_code=status.HTTP_201_CREATED)
 def create_pocket(pocket: PocketCreate, session: SessionDep):
     logger.debug("Request to POST Pocket with {pocket}")
     db_pocket = Pocket.model_validate(pocket)
