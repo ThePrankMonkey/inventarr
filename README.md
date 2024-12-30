@@ -34,9 +34,13 @@ I'm also considering this to be a fun way to practice some React.
   - [x] Copy Chests (Create a duplicate with same count and types of pockets, but new ids)
   - [ ] Support Labels
     - [x] Generate QR Code
+      - [x] QR Code is stringified JSON like `{ "type": "item", "id": 1 }`
     - [x] Generate Message
     - [ ] Handle min/max for labels
     - [ ] Handle text resizing
+  - [ ] Support Inventory Checking
+    - [ ] New route that takes in the scan of a qr and returns full data
+      - [ ] Data will be different for different types
   - [ ] ???
 - [ ] Advanced Frontend
   - [x] Show photos in table
@@ -49,7 +53,14 @@ I'm also considering this to be a fun way to practice some React.
     - [x] Update Create
     - [ ] Update Modify
     - [ ] Handle min/max for labels
+  - [ ] Support Inventory Checking
+    - [ ] New page that has an input for the value of a qrcode
+      - [ ] Will display data differently depending on the type
+      - [ ] Will select the input so a new entry will override and kick off new data pull
   - [ ] ???
+
+### Extra Features
+
 - [ ] Use/Restock
   - [ ] Work on Unit Conversions
   - [ ] Use Ingredients/Components
@@ -59,3 +70,5 @@ I'm also considering this to be a fun way to practice some React.
     - https://www.brother-usa.com/products/ql600 ???
   - [x] Create Labels
 - [ ] Integrate Barcode Scanner
+  - [ ] Research Scanners
+    - https://www.amazon.com/Tera-Wireless-Charging-Handheld-Automatic/dp/B07KZLK5WY
