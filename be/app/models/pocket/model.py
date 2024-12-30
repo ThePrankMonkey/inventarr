@@ -12,7 +12,6 @@ class PocketBase(SQLModel):
     location: str = Field()
     label_width: float = Field(default=0)  # in_inches
     label_height: float = Field(default=0)  # in_inches
-    location: str = Field()
     chest_id: int = Field(foreign_key="chest.id")
     room_id: int = Field(foreign_key="room.id")
 
