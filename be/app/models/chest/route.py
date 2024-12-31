@@ -133,8 +133,9 @@ def delete_chest(chest_id: int, session: SessionDep):
     logger.debug(f"Request to DELETE Chest {chest_id}")
     db_chest = session.get(Chest, chest_id)
     if not db_chest:
-        raise HTTPException(status_code=404, detail="Item not found")
-    # TODO: Add checks/logic for pockets being deleted first
+        raise HTTPException(status_code=404, detail="Chest not found")
+    if db_chest.pockets:
+        raise HTTPException(status_code=400, detail="Chest not empty")
     session.delete(db_chest)
     session.commit()
     return {"message": f"Chest {chest_id} was deleted."}

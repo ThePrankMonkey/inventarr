@@ -83,3 +83,16 @@ def update_pocket(pocket_id: int, pocket: PocketPublic, session: SessionDep):
     session.commit()
     session.refresh(db_pocket)
     return db_pocket
+
+
+@router.delete("/{pocket_id}")
+def delete_pocket(pocket_id: int, session: SessionDep):
+    logger.debug(f"Request to DELETE Pocket {pocket_id}")
+    db_pocket = session.get(Pocket, pocket_id)
+    if not db_pocket:
+        raise HTTPException(status_code=404, detail="Pocket not found")
+    if db_pocket.items:
+        raise HTTPException(status_code=400, detail="Pocket not empty")
+    session.delete(db_pocket)
+    session.commit()
+    return {"message": f"Pocket {pocket_id} was deleted."}

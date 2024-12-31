@@ -73,3 +73,16 @@ def update_room(room_id: int, room: RoomPublic, session: SessionDep):
     session.commit()
     session.refresh(db_room)
     return db_room
+
+
+@router.delete("/{room_id}")
+def delete_room(room_id: int, session: SessionDep):
+    logger.debug(f"Request to DELETE Room {room_id}")
+    db_room = session.get(Room, room_id)
+    if not db_room:
+        raise HTTPException(status_code=404, detail="Room not found")
+    if db_room.chests:
+        raise HTTPException(status_code=400, detail="Room not empty")
+    session.delete(db_room)
+    session.commit()
+    return {"message": f"Room {room_id} was deleted."}
