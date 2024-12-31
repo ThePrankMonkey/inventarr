@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.db import create_db_and_tables
 from app.load_test_data import create_demo_data
+from app.inventory.route import router as inventory_router
 from app.models.room.route import router as room_router
 from app.models.chest.route import router as chest_router
 from app.models.pocket.route import router as pocket_router
@@ -21,6 +22,7 @@ app.include_router(room_router)
 app.include_router(chest_router)
 app.include_router(pocket_router)
 app.include_router(item_router)
+app.include_router(inventory_router)
 
 # Support CORs
 origins = [

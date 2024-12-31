@@ -38,9 +38,9 @@ I'm also considering this to be a fun way to practice some React.
     - [x] Generate Message
     - [ ] Handle min/max for labels
     - [ ] Handle text resizing
-  - [ ] Support Inventory Checking
-    - [ ] New route that takes in the scan of a qr and returns full data
-      - [ ] Data will be different for different types
+  - [x] Support Inventory Checking
+    - [x] New route that takes in the scan of a qr and returns full data
+      - [x] Data will be different for different types
   - [ ] ???
 - [ ] Advanced Frontend
   - [x] Show photos in table
@@ -72,3 +72,7 @@ I'm also considering this to be a fun way to practice some React.
 - [ ] Integrate Barcode Scanner
   - [ ] Research Scanners
     - https://www.amazon.com/Tera-Wireless-Charging-Handheld-Automatic/dp/B07KZLK5WY
+- [ ] Load Item data from barcode?
+  - https://go-upc.com/plans/api
+  - https://www.upcitemdb.com/upc/38000001277
+  - https://devs.upcitemdb.com/

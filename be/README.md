@@ -41,6 +41,11 @@ http DELETE http://127.0.0.1:5123/chests/3
 
 http POST http://127.0.0.1:5123/chests/1/copy name="Component 2" room_id=1
 
+### Perform Inventory Scan
+
+http POST http://127.0.0.1:5123/inventory scan='{"type": "pocket", "id": 4}'
+http POST http://127.0.0.1:5123/inventory scan="{\"type\": \"pocket\", \"id\": 4}"
+
 ## Notices
 
 Fonts from: https://www.gnu.org/software/freefont/
