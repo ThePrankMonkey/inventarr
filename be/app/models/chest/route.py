@@ -22,7 +22,7 @@ router = APIRouter(prefix="/chests")
 
 @router.post("", response_model=ChestPublic, status_code=status.HTTP_201_CREATED)
 def create_chest(chest: ChestCreate, session: SessionDep):
-    logger.debug("Request to POST chest with {chest}")
+    logger.debug(f"Request to POST chest with {chest}")
     db_chest = Chest.model_validate(chest)
     session.add(db_chest)
     session.commit()
@@ -34,7 +34,7 @@ def create_chest(chest: ChestCreate, session: SessionDep):
     "/{chest_id}/copy", response_model=ChestPublic, status_code=status.HTTP_201_CREATED
 )
 def create_chest_copy(chest_id: int, chest: ChestCreate, session: SessionDep):
-    logger.debug("Request to POST copy chest {chest_id} with {chest}")
+    logger.debug(f"Request to POST copy chest {chest_id} with {chest}")
     db_chest = Chest.model_validate(chest)
     session.add(db_chest)
     session.commit()
@@ -70,7 +70,7 @@ def get_chests(
 
 @router.get("/{chest_id}")
 def get_chest(chest_id: int, session: SessionDep):
-    logger.debug("Request to GET chest {chest_id}")
+    logger.debug(f"Request to GET chest {chest_id}")
     chest = session.get(Chest, chest_id)
     if not chest:
         raise HTTPException(status_code=404, detail="Chest not found")
@@ -116,7 +116,7 @@ def get_chest_pockets(
 
 @router.patch("/{chest_id}", response_model=ChestPublic)
 def update_chest(chest_id: int, chest: ChestPublic, session: SessionDep):
-    print(f"Request to PATCH Chest {chest_id} with {chest}")
+    logger.debug(f"Request to PATCH Chest {chest_id} with {chest}")
     db_chest = session.get(Chest, chest_id)
     if not db_chest:
         raise HTTPException(status_code=404, detail="Chest not found")
