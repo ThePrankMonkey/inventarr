@@ -30,12 +30,19 @@ test("ListRooms renders options and calls bubbleUp", async () => {
   // Wait for the fetch to resolve and options to render
   await waitFor(() => screen.getByText("1, Meeting Room 1 in Floor 1"));
 
+  // Check initial state - select should be empty
+  const select = screen.getByLabelText("Select a room:");
+  expect(select.value).toBe("");
+
   // Check if options are rendered
   expect(screen.getByText("1, Meeting Room 1 in Floor 1")).toBeInTheDocument();
   expect(screen.getByText("2, Conference Room in Floor 2")).toBeInTheDocument();
 
   // Simulate selecting a room
   fireEvent.change(screen.getByRole("combobox"), { target: { value: "1" } });
+
+  // Check if selected room is updated
+  expect(select.value).toBe("1"); // id of selected room
 
   // Check if bubbleUp is called
   expect(bubbleUp).toHaveBeenCalledWith("1");

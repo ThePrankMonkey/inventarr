@@ -23,14 +23,17 @@ const ListRooms = ({ bubbleUp }) => {
     bubbleUp(event.target.value);
   };
   return (
-    <select value={selectedRoom} onChange={handleRoomChange}>
-      <option value="">Select Room</option>
-      {rooms.map((room) => (
-        <option key={room.id} value={room.id}>
-          {room.id}, {room.name} in {room.location}
-        </option>
-      ))}
-    </select>
+    <label>
+      Select a room:
+      <select value={selectedRoom} onChange={handleRoomChange}>
+        <option value="">Select Room</option>
+        {rooms.map((room) => (
+          <option key={room.id} value={room.id}>
+            {room.id}, {room.name} in {room.location}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 };
 

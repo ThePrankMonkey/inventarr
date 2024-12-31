@@ -102,10 +102,7 @@ const CreateChest = () => {
             }
           />
         </label>
-        <label>
-          Select a room:
-          <ListRooms bubbleUp={bubbleUpRooms} />
-        </label>
+        <ListRooms bubbleUp={bubbleUpRooms} />
         <button type="submit">Submit</button>
       </form>
     </>

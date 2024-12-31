@@ -84,10 +84,7 @@ const CreatePocket = () => {
             }
           />
         </label>
-        <label>
-          Select a room:
-          <ListRooms bubbleUp={bubbleUpRooms} />
-        </label>
+        <ListRooms bubbleUp={bubbleUpRooms} />
         <label>
           Select a chest:
           {roomId ? (

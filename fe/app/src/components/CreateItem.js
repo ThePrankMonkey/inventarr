@@ -108,7 +108,7 @@ const CreateItem = () => {
           />
         </label>
         <label>
-          Select a room:
+          Select an item type:
           <ListItemTypes bubbleUp={bubbleUpItemTypes} />
         </label>
         <label>
@@ -137,10 +137,7 @@ const CreateItem = () => {
             }
           />
         </label>
-        <label>
-          Select a room:
-          <ListRooms bubbleUp={bubbleUpRooms} />
-        </label>
+        <ListRooms bubbleUp={bubbleUpRooms} />
         <label>
           Select a chest:
           {roomId ? (
