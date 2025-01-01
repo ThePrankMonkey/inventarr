@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import config from "../config";
 
-const ListRooms = ({ bubbleUp }) => {
+const ListRooms = ({ bubbleUp, roomValue }) => {
   const [rooms, setRooms] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState(""); // Selected user from dropdown
+  const [selectedRoom, setSelectedRoom] = useState(roomValue); // Selected user from dropdown
 
   useEffect(() => {
     // Fetch user data from an API
@@ -17,6 +17,10 @@ const ListRooms = ({ bubbleUp }) => {
     };
     fetchRooms();
   }, []);
+
+  useEffect(() => {
+    setSelectedRoom(roomValue);
+  }, [roomValue]);
 
   const handleRoomChange = (event) => {
     setSelectedRoom(event.target.value);

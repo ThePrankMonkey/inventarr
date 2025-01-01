@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import config from "../config";
 
-const ListChestPockets = ({ chestId, bubbleUp }) => {
+const ListChestPockets = ({ chestId, bubbleUp, pocketValue }) => {
   const [pockets, setpockets] = useState([]);
-  const [selectedPocket, setSelectedPocket] = useState(""); // Selected user from dropdown
+  const [selectedPocket, setSelectedPocket] = useState(pocketValue); // Selected user from dropdown
 
   useEffect(() => {
     // Fetch user data from an API
@@ -19,6 +19,10 @@ const ListChestPockets = ({ chestId, bubbleUp }) => {
     };
     fetchPokets();
   }, [chestId]);
+
+  useEffect(() => {
+    setSelectedPocket(pocketValue);
+  }, [pocketValue]);
 
   const handlePocketChange = (event) => {
     setSelectedPocket(event.target.value);

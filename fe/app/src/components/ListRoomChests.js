@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import config from "../config";
 
-const ListRoomChests = ({ roomId, bubbleUp }) => {
+const ListRoomChests = ({ roomId, bubbleUp, chestValue }) => {
   const [chests, setChests] = useState([]);
-  const [selectedChest, setSelectedChest] = useState(""); // Selected user from dropdown
+  const [selectedChest, setSelectedChest] = useState(chestValue); // Selected user from dropdown
 
   useEffect(() => {
     // Fetch user data from an API
@@ -19,6 +19,10 @@ const ListRoomChests = ({ roomId, bubbleUp }) => {
     };
     fetchChests();
   }, [roomId]);
+
+  useEffect(() => {
+    setSelectedChest(chestValue);
+  }, [chestValue]);
 
   const handleChestChange = (event) => {
     setSelectedChest(event.target.value);
