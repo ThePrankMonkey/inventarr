@@ -53,10 +53,10 @@ I'm also considering this to be a fun way to practice some React.
     - [x] Update Create
     - [ ] Update Modify
     - [ ] Handle min/max for labels
-  - [ ] Support Inventory Checking
-    - [ ] New page that has an input for the value of a qrcode
-      - [ ] Will display data differently depending on the type
-      - [ ] Will select the input so a new entry will override and kick off new data pull
+  - [x] Support Inventory Checking
+    - [x] New page that has an input for the value of a qrcode
+      - [x] Will display data differently depending on the type
+      - [x] Will select the input so a new entry will override and kick off new data pull
   - [ ] ???
 
 ### Extra Features
