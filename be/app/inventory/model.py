@@ -2,10 +2,10 @@ from typing import Optional, Literal, Union
 
 from pydantic import BaseModel
 
-from app.models.room.model import Room, RoomPublic
-from app.models.chest.model import Chest, ChestPublic
-from app.models.pocket.model import Pocket, PocketPublic
-from app.models.item.model import Item, ItemPublic
+from app.models.room.model import RoomPublic
+from app.models.chest.model import ChestPublic
+from app.models.pocket.model import PocketPublic
+from app.models.item.model import ItemPublic, ItemPublicFull
 
 ###############
 ## Inventory ##
@@ -24,10 +24,11 @@ class InventoryLocating(BaseModel):
 
 class InventoryContents(BaseModel):
     items: list[ItemPublic]
+    pockets: list[PocketPublic]
 
 
 class InventoryResponse(BaseModel):
-    entry_type: Literal["Item", "Pocket", "Chest", "Room"]
+    entry_type: Literal["item", "pocket", "chest", "room"]
     locating: InventoryLocating
     contents: InventoryContents
-    data: Union[Item, Pocket, Chest, Room]
+    data: Union[ItemPublic, PocketPublic, ChestPublic, RoomPublic]
