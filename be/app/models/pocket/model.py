@@ -34,3 +34,7 @@ class PocketUpdate(PocketBase):
     name: str | None = None
     location: str | None = None
     chest_id: int | None = None
+
+
+class PocketScan(PocketPublic):
+    entry_type: str = "Pocket"

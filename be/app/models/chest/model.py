@@ -32,3 +32,7 @@ class ChestCreate(ChestBase):
 class ChestUpdate(ChestBase):
     name: str | None = None
     room_id: int | None = None
+
+
+class ChestScan(ChestPublic):
+    entry_type: str = "Chest"
