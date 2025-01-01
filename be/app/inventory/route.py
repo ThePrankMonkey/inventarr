@@ -50,7 +50,7 @@ def check_inventory(scan: InventoryInput, session: SessionDep):
     return db_entry
 
 
-@router.post("/v2", response_model=InventoryResponse)
+@router.post("/v2", response_model=InventoryResponse, tags=["experimental"])
 def check_inventory_v2(scan: InventoryInput, session: SessionDep):
     logger.debug(f"Request to POST check inventory with {scan}")
     try:
