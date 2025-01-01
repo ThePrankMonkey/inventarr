@@ -25,7 +25,16 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    lifespan=lifespan,
+    title=settings.app_name,
+    openapi_tags=[
+        {
+            "name": "experimental",
+            "description": "Experimental endpoints subject to change.",
+        }
+    ],
+)
 app.include_router(room_router)
 app.include_router(chest_router)
 app.include_router(pocket_router)
@@ -54,7 +63,20 @@ def read_root():
     return {"Hello": "World", "From": settings.app_name}
 
 
-@app.get("/reset_db")
+def check_dev_mode():
+    """
+    Raises an HTTPException if not in development mode.
+
+    Raises:
+        HTTPException: 400 Bad Request if not in development mode.
+    """
+    if settings.stage != "dev":
+        raise HTTPException(
+            status_code=403, detail="Endpoint available only in development mode."
+        )
+
+
+@app.get("/reset_db", dependencies=[Depends(check_dev_mode)])
 def database_reset():
     reset_db(with_test_data=True)
     return "Database Reset"

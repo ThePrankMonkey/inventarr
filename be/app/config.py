@@ -27,10 +27,12 @@ class Settings(BaseSettings):
 
 
 class TestSettings(Settings):
+    stage: str = "test"
     database_url: str = ""
 
 
 class DevSettings(Settings):
+    stage: str = "dev"
     database_url: str = "sqlite:///database.db"
     storage_path: str = os.path.abspath(
         os.path.join(
@@ -41,6 +43,7 @@ class DevSettings(Settings):
 
 
 class ProdSettings(Settings):
+    stage: str = "prod"
     database_url: str = ""
 
 
