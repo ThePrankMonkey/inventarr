@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.db import create_db_and_tables
-from app.load_test_data import create_demo_data
+from app.helpers.load_test_data import reset_db
 from app.inventory.route import router as inventory_router
 from app.models.room.route import router as room_router
 from app.models.chest.route import router as chest_router
@@ -52,3 +52,9 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"Hello": "World", "From": settings.app_name}
+
+
+@app.get("/reset_db")
+def database_reset():
+    reset_db(with_test_data=True)
+    return "Database Reset"
