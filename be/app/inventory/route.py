@@ -42,6 +42,6 @@ def check_inventory(scan: InventoryScan, session: SessionDep):
             status_code=404, detail=f"{entry_type} {entry_id} not found"
         )
     # convert entry to dict to add entry_type
-    response = model_scan(**db_entry.dict())
+    response = model_scan(**db_entry.model_dump())
     logger.info(f"Entry Type {entry_type} {entry_id}: {response}")
     return response

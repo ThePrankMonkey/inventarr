@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 import json
 import logging
 
@@ -17,7 +18,14 @@ logging.basicConfig(level=logging.INFO)
 # logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.include_router(room_router)
 app.include_router(chest_router)
 app.include_router(pocket_router)
@@ -39,12 +47,6 @@ app.add_middleware(
     allow_headers=["*"],
     expose_headers=["*"],
 )
-
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
-    # create_demo_data()
 
 
 @app.get("/")
