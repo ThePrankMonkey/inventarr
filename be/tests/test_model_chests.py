@@ -18,13 +18,14 @@ def test_create_chest(client):
     assert response.status_code == 201
 
 
-def test_read_chest(client):
+def test_read_chest(client, test_data):
+    data = test_data
     response = client.get("/chests/1")
     assert response.status_code == 200
     assert response.json() == {
         "id": 1,
-        "name": "TestChest",
-        "label_width": 2,
-        "label_height": 1,
-        "room_id": 1,
+        "name": data["chest"].name,
+        "label_width": data["chest"].label_width,
+        "label_height": data["chest"].label_height,
+        "room_id": data["chest"].room_id,
     }

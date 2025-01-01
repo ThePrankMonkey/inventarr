@@ -16,11 +16,12 @@ def test_create_room(client):
     assert response.status_code == 201
 
 
-def test_read_room(client):
+def test_read_room(client, test_data):
+    data = test_data
     response = client.get("/rooms/1")
     assert response.status_code == 200
     assert response.json() == {
         "id": 1,
-        "name": "TestRoom",
-        "location": "Narnia",
+        "name": data["room"].name,
+        "location": data["room"].location,
     }
