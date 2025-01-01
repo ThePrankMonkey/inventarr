@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 import json
 import logging
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
