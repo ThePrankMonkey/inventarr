@@ -7,7 +7,12 @@ from fastapi.responses import FileResponse
 from sqlmodel import select
 
 from app.db import SessionDep
-from app.inventory.model import InventoryScan
+from app.inventory.model import (
+    InventoryInput,
+    InventoryResponse,
+    InventoryLocating,
+    InventoryContents,
+)
 from app.models.chest.model import Chest, ChestScan
 from app.models.pocket.model import Pocket, PocketScan
 
@@ -17,7 +22,7 @@ router = APIRouter(prefix="/inventory")
 
 
 @router.post("", response_model=Union[ChestScan, PocketScan])
-def check_inventory(scan: InventoryScan, session: SessionDep):
+def check_inventory(scan: InventoryInput, session: SessionDep):
     logger.debug(f"Request to POST check inventory with {scan}")
     try:
         data = json.loads(scan.scan)
@@ -41,7 +46,16 @@ def check_inventory(scan: InventoryScan, session: SessionDep):
         raise HTTPException(
             status_code=404, detail=f"{entry_type} {entry_id} not found"
         )
-    # convert entry to dict to add entry_type
-    response = model_scan(**db_entry.model_dump())
-    logger.info(f"Entry Type {entry_type} {entry_id}: {response}")
-    return response
+    logger.info(db_entry.items)
+    return db_entry
+
+
+@router.post("/v2", response_model=InventoryResponse)
+def check_inventory_v2(scan: InventoryInput, session: SessionDep):
+    logger.debug(f"Request to POST check inventory with {scan}")
+    try:
+        data = json.loads(scan.scan)
+        entry_type = data["type"]
+        entry_id = data["id"]
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON data")

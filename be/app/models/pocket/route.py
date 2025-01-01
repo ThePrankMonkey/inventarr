@@ -56,6 +56,7 @@ def get_pocket_full(pocket_id: int, session: SessionDep):
     pocket = session.get(Pocket, pocket_id)
     if not pocket:
         raise HTTPException(status_code=404, detail="Pocket not found")
+    logger.debug(f"Items: {pocket.items}")
     logger.info(f"Pocket {pocket_id}: {Pocket}")
     return pocket
 
