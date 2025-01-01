@@ -38,4 +38,5 @@ testpaths = [
 [tool.coverage.run]
 omit = [
     "/usr/lib/*",
+    "tests/*",
 ]

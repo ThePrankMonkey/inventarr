@@ -93,7 +93,6 @@ def get_item(item_id: int, session: SessionDep):
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
     logger.info(f"Item {item_id}: {item}")
-    logger.info(item_types)
     return item
 
 

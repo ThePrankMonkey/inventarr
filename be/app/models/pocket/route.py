@@ -10,6 +10,7 @@ from app.helpers.label_maker import make_label
 from app.models.pocket.model import (
     Pocket,
     PocketPublic,
+    PocketPublicFull,
     PocketCreate,
     PocketUpdate,
 )
@@ -41,6 +42,16 @@ def get_pockets(
 
 @router.get("/{pocket_id}")
 def get_pocket(pocket_id: int, session: SessionDep):
+    logger.debug("Request to GET Pocket {pocket_id}")
+    pocket = session.get(Pocket, pocket_id)
+    if not pocket:
+        raise HTTPException(status_code=404, detail="Pocket not found")
+    logger.info(f"Pocket {pocket_id}: {Pocket}")
+    return pocket
+
+
+@router.get("/{pocket_id}/full", response_model=PocketPublicFull)
+def get_pocket_full(pocket_id: int, session: SessionDep):
     logger.debug("Request to GET Pocket {pocket_id}")
     pocket = session.get(Pocket, pocket_id)
     if not pocket:

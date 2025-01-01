@@ -27,6 +27,7 @@ http GET http://127.0.0.1:5123/rooms/1/chests
 http GET http://127.0.0.1:5123/rooms
 http GET http://127.0.0.1:5123/chests
 http GET http://127.0.0.1:5123/pockets
+http GET http://127.0.0.1:5123/pockets/1/full
 http GET http://127.0.0.1:5123/items
 ```
 

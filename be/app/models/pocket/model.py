@@ -1,6 +1,8 @@
 from sqlmodel import SQLModel, Field, Relationship
-from app.models.chest.model import Chest
 
+# from app.models.item.model import ItemPublic
+from app.models.chest.model import Chest, ChestPublic
+from app.models.room.model import Room, RoomPublic
 
 ############
 ## Pocket ##
@@ -20,10 +22,18 @@ class Pocket(PocketBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     items: list["Item"] = Relationship(back_populates="pocket")
     chest: Chest | None = Relationship(back_populates="pockets")
+    room: Room | None = Relationship(back_populates="pockets")
 
 
 class PocketPublic(PocketBase):
     id: int
+
+
+class PocketPublicFull(PocketPublic):
+    room: RoomPublic
+    chest: ChestPublic
+    # items: List[ItemPublic]
+    # items: list["ItemPublic"]
 
 
 class PocketCreate(PocketBase):
@@ -38,3 +48,4 @@ class PocketUpdate(PocketBase):
 
 class PocketScan(PocketPublic):
     entry_type: str = "Pocket"
+    # items: list
