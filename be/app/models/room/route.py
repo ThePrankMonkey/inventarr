@@ -62,12 +62,12 @@ def get_room_chests(
 
 
 @router.patch("/{room_id}", response_model=RoomPublic)
-def update_room(room_id: int, room: RoomPublic, session: SessionDep):
+def update_room(room_id: int, room: RoomUpdate, session: SessionDep):
     logger.debug(f"Request to PATCH Room {room_id} with {room}")
     db_room = session.get(Room, room_id)
     if not db_room:
         raise HTTPException(status_code=404, detail="Room not found")
-    room_data = Room.model_dump(exclude_unset=True)
+    room_data = room.model_dump(exclude_unset=True)
     db_room.sqlmodel_update(room_data)
     session.add(db_room)
     session.commit()

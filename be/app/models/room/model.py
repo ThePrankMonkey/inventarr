@@ -28,4 +28,4 @@ class RoomCreate(RoomBase):
 
 class RoomUpdate(RoomBase):
     name: str | None = None
-    location: int | None = None
+    location: str | None = None
