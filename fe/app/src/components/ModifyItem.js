@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import config from "../config";
 
@@ -12,6 +12,7 @@ const ModifyItem = () => {
   const [roomId, setRoomId] = useState("");
   const [chestId, setChestId] = useState("");
   const [pocketId, setPocketId] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
   const [formData, setFormData] = useState({
     itemId: "",
     name: "",
@@ -24,7 +25,10 @@ const ModifyItem = () => {
     upc: "",
     notes: "",
     image_file: "",
+    thumb_file: "",
   });
+
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     handleItemChange();
@@ -85,12 +89,45 @@ const ModifyItem = () => {
     );
 
     setFormData(updatedFormData);
+
+    //Reset uploaded image
+    setSelectedFile(null);
+    fileInputRef.current.value = ""; // Clear the input value
+  };
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const payload = formData;
+      // Upload a file
+      if (selectedFile != null) {
+        const payloadFile = new FormData();
+        payloadFile.append("file", selectedFile);
+        console.log("Sending Payload File: ", payloadFile);
+        const responseFile = await fetch(`${config.BACKEND_URL}/items/photo`, {
+          method: "POST",
+          body: payloadFile,
+        });
+        const dataFile = await responseFile.json();
+        console.log("Image Upload response:", dataFile);
+        setFormData({
+          ...formData,
+          image_file: dataFile.image_file,
+          thumb_file: dataFile.thumb_file,
+        });
+        payload.image_file = dataFile.image_file;
+        payload.thumb_file = dataFile.thumb_file;
+      }
+      // Remove images if blank
+      if (payload.image_file === "") {
+        delete payload.image_file;
+        delete payload.thumb_file;
+      }
+      // PATCH Item
       console.log("Sending Payload: ", payload);
       const response = await fetch(`${config.BACKEND_URL}/items/${itemId}`, {
         method: "PATCH",
@@ -208,6 +245,16 @@ const ModifyItem = () => {
               })
             }
           />
+        </label>
+        <label>
+          Select an image:
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            ref={fileInputRef}
+          />
+          {selectedFile && <p>Selected file: {selectedFile.name}</p>}
         </label>
         <button type="submit">Submit</button>
       </form>
