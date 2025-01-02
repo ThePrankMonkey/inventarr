@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import ListRooms from "./ListRooms";
 import ListRoomChests from "./ListRoomChests";
 import config from "../config";
+import { preventExtremeLabels } from "../helpers";
 
 const CreatePocket = () => {
+  const minLabel = config.MIN_LABEL_WIDTH_INCHES;
+  const maxLabel = config.MAX_LABEL_WIDTH_INCHES;
   const [roomId, setRoomId] = useState("");
   const [chestId, setChestId] = useState("");
   const [formData, setFormData] = useState({
@@ -98,13 +101,16 @@ const CreatePocket = () => {
           <input
             type="number"
             step="any"
+            min={minLabel}
+            max={maxLabel}
             value={formData.label_width}
-            onChange={(e) =>
+            onChange={(e) => {
+              preventExtremeLabels(e);
               setFormData({
                 ...formData,
                 label_width: e.target.value,
-              })
-            }
+              });
+            }}
           />
         </label>
         <label>
@@ -112,13 +118,16 @@ const CreatePocket = () => {
           <input
             type="number"
             step="any"
+            min={minLabel}
+            max={maxLabel}
             value={formData.label_height}
-            onChange={(e) =>
+            onChange={(e) => {
+              preventExtremeLabels(e);
               setFormData({
                 ...formData,
                 label_height: e.target.value,
-              })
-            }
+              });
+            }}
           />
         </label>
         <button type="submit">Submit</button>

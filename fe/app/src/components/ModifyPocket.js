@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import config from "../config";
+import { preventExtremeLabels } from "../helpers";
 
 import ListPockets from "./ListPockets";
 import ListRooms from "./ListRooms";
@@ -8,6 +9,8 @@ import ListRoomChests from "./ListRoomChests";
 import ListChestPockets from "./ListChestPockets";
 
 const ModifyPocket = () => {
+  const minLabel = config.MIN_LABEL_WIDTH_INCHES;
+  const maxLabel = config.MAX_LABEL_WIDTH_INCHES;
   const [pocketId, setPocketId] = useState("");
   const [roomId, setRoomId] = useState("");
   const [chestId, setChestId] = useState("");
@@ -132,27 +135,35 @@ const ModifyPocket = () => {
         <label>
           Enter a label width (inches):
           <input
-            type="text"
+            type="number"
+            step="any"
+            min={minLabel}
+            max={maxLabel}
             value={formData.label_width}
-            onChange={(e) =>
+            onChange={(e) => {
+              preventExtremeLabels(e);
               setFormData({
                 ...formData,
                 label_width: e.target.value,
-              })
-            }
+              });
+            }}
           />
         </label>
         <label>
           Enter a label height (inches):
           <input
-            type="text"
+            type="number"
+            step="any"
+            min={minLabel}
+            max={maxLabel}
             value={formData.label_height}
-            onChange={(e) =>
+            onChange={(e) => {
+              preventExtremeLabels(e);
               setFormData({
                 ...formData,
                 label_height: e.target.value,
-              })
-            }
+              });
+            }}
           />
         </label>
         <label>

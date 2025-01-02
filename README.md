@@ -50,10 +50,10 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Inventory checks
   - [ ] Support Create Thumbnails
   - [ ] Support Copy Chests
-  - [ ] Support Labels
+  - [x] Support Labels
     - [x] Update Create
-    - [ ] Update Modify
-    - [ ] Handle min/max for labels
+    - [x] Update Modify
+    - [x] Handle min/max for labels
   - [x] Support Inventory Checking
     - [x] New page that has an input for the value of a qrcode
       - [x] Will display data differently depending on the type

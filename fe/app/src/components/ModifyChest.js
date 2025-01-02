@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 import config from "../config";
+import { preventExtremeLabels } from "../helpers";
 
 import ListChests from "./ListChests";
 import ListRooms from "./ListRooms";
 
 const ModifyChest = () => {
+  const minLabel = config.MIN_LABEL_WIDTH_INCHES;
+  const maxLabel = config.MAX_LABEL_WIDTH_INCHES;
   const [chestId, setChestId] = useState("");
   const [roomId, setRoomId] = useState("");
   const [formData, setFormData] = useState({
@@ -101,27 +104,35 @@ const ModifyChest = () => {
         <label>
           Enter a label width (inches):
           <input
-            type="text"
+            type="number"
+            step="any"
+            min={minLabel}
+            max={maxLabel}
             value={formData.label_width}
-            onChange={(e) =>
+            onChange={(e) => {
+              preventExtremeLabels(e);
               setFormData({
                 ...formData,
                 label_width: e.target.value,
-              })
-            }
+              });
+            }}
           />
         </label>
         <label>
           Enter a label height (inches):
           <input
-            type="text"
+            type="number"
+            step="any"
+            min={minLabel}
+            max={maxLabel}
             value={formData.label_height}
-            onChange={(e) =>
+            onChange={(e) => {
+              preventExtremeLabels(e);
               setFormData({
                 ...formData,
                 label_height: e.target.value,
-              })
-            }
+              });
+            }}
           />
         </label>
         <label>
