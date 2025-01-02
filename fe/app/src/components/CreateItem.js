@@ -113,7 +113,10 @@ const CreateItem = () => {
         </label>
         <label>
           Select an item type:
-          <ListItemTypes bubbleUp={bubbleUpItemTypes} />
+          <ListItemTypes
+            bubbleUp={bubbleUpItemTypes}
+            itemTypeValue={itemType}
+          />
         </label>
         <label>
           Enter a quantity:

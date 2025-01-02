@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import config from "../config";
 
-const ListItemTypes = ({ bubbleUp }) => {
+const ListItemTypes = ({ bubbleUp, itemTypeValue }) => {
   const [itemTypes, setItemTypes] = useState([]);
-  const [selectedItemType, setSelectedItemType] = useState(""); // Selected user from dropdown
+  const [selectedItemType, setSelectedItemType] = useState(itemTypeValue); // Selected user from dropdown
 
   useEffect(() => {
     // Fetch user data from an API
@@ -17,6 +17,10 @@ const ListItemTypes = ({ bubbleUp }) => {
     };
     fetchItemTypes();
   }, []);
+
+  useEffect(() => {
+    setSelectedItemType(itemTypeValue);
+  }, [itemTypeValue]);
 
   const handleItemChange = (event) => {
     setSelectedItemType(event.target.value);
