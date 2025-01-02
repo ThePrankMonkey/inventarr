@@ -10,6 +10,7 @@ const CreateItem = () => {
   const [itemType, setItemType] = useState("");
   const [roomId, setRoomId] = useState("");
   const [chestId, setChestId] = useState("");
+  const [pocketId, setPocketId] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -37,6 +38,7 @@ const CreateItem = () => {
       ...formData,
       room_id: value,
     });
+    setPocketId("");
   };
   const bubbleUpRoomChests = (value) => {
     setChestId(value);
@@ -46,6 +48,7 @@ const CreateItem = () => {
     });
   };
   const bubbleUpChestPockets = (value) => {
+    setPocketId(value);
     setFormData({
       ...formData,
       pocket_id: value,
@@ -138,11 +141,15 @@ const CreateItem = () => {
             }
           />
         </label>
-        <ListRooms bubbleUp={bubbleUpRooms} />
+        <ListRooms bubbleUp={bubbleUpRooms} roomValue={roomId} />
         <label>
           Select a chest:
           {roomId ? (
-            <ListRoomChests bubbleUp={bubbleUpRoomChests} roomId={roomId} />
+            <ListRoomChests
+              bubbleUp={bubbleUpRoomChests}
+              roomId={roomId}
+              chestValue={chestId}
+            />
           ) : (
             <p>"Please select a room first"</p>
           )}
@@ -153,6 +160,7 @@ const CreateItem = () => {
             <ListChestPockets
               bubbleUp={bubbleUpChestPockets}
               chestId={chestId}
+              pocketValue={pocketId}
             />
           ) : (
             <p>"Please select a chest first"</p>
