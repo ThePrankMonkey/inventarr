@@ -14,7 +14,6 @@ const ModifyItem = () => {
   const [pocketId, setPocketId] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [formData, setFormData] = useState({
-    itemId: "",
     name: "",
     item_type: "",
     pocket_id: "",
@@ -48,6 +47,7 @@ const ModifyItem = () => {
       ...formData,
       room_id: value,
     });
+    setPocketId("");
   };
   const bubbleUpRoomChests = (value) => {
     setChestId(value);
@@ -194,9 +194,7 @@ const ModifyItem = () => {
             }
           />
         </label>
-        <label>
-          <ListRooms bubbleUp={bubbleUpRooms} roomValue={roomId} />
-        </label>
+        <ListRooms bubbleUp={bubbleUpRooms} roomValue={roomId} />
         <label>
           Select a chest:
           {roomId ? (
