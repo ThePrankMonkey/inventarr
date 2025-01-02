@@ -71,6 +71,7 @@ const CreateItem = () => {
       setFormData({
         ...formData,
         image_file: dataFile.image_file,
+        thumb_file: dataFile.thumb_file,
       });
       // Create an Item
       const payloadItem = formData;
