@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 
 import config from "../config";
 
+import ListItemTypes from "./ListItemTypes";
 import ListItems from "./ListItems";
 import ListRooms from "./ListRooms";
 import ListRoomChests from "./ListRoomChests";
 import ListChestPockets from "./ListChestPockets";
 
 const ModifyItem = () => {
+  const [itemType, setItemType] = useState("");
   const [itemId, setItemId] = useState("");
   const [roomId, setRoomId] = useState("");
   const [chestId, setChestId] = useState("");
@@ -40,6 +42,13 @@ const ModifyItem = () => {
       itemId: value,
     });
     handleItemChange(value);
+  };
+  const bubbleUpItemTypes = (value) => {
+    setItemType(value);
+    setFormData({
+      ...formData,
+      item_type: value,
+    });
   };
   const bubbleUpRooms = (value) => {
     setRoomId(value);
@@ -74,6 +83,7 @@ const ModifyItem = () => {
     }
     const response = await fetch(`${config.BACKEND_URL}/items/${value}`);
     const data = await response.json();
+    setItemType(data.item_type);
     console.log("Room:", data.room_id);
     setRoomId(data.room_id);
     console.log("Chest:", data.chest_id);
@@ -166,6 +176,13 @@ const ModifyItem = () => {
                 name: e.target.value,
               })
             }
+          />
+        </label>
+        <label>
+          Select an item type:
+          <ListItemTypes
+            bubbleUp={bubbleUpItemTypes}
+            itemTypeValue={itemType}
           />
         </label>
         <label>

@@ -26,6 +26,7 @@ I'm also considering this to be a fun way to practice some React.
   - [x] View
   - [x] Create
   - [x] Modify
+    - [x] TODO: Support Item Types in Modify Item
   - [ ] Delete
   - [x] Share Data via Env Var and Config
 - [ ] Advanced Backend
