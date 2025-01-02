@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ModifyItem from "./ModifyItem";
 import ModifyPocket from "./ModifyPocket";
-// import ModifyChest from "./ModifyChest";
+import ModifyChest from "./ModifyChest";
 // import ModifyRoom from "./ModifyRoom";
 
 const Modify = () => {
@@ -25,7 +25,7 @@ const Modify = () => {
       </select>
       {selectedModel == "Item" ? <ModifyItem /> : ""}
       {selectedModel == "Pocket" ? <ModifyPocket /> : ""}
-      {/* {selectedModel == "Chest" ? <ModifyChest /> : ""} */}
+      {selectedModel == "Chest" ? <ModifyChest /> : ""}
       {/* {selectedModel == "Room" ? <ModifyRoom /> : ""} */}
     </>
   );
