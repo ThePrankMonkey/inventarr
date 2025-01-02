@@ -1,8 +1,8 @@
 from sqlmodel import SQLModel, Field, Relationship
 
-
 from app.models.chest.model import Chest, ChestPublic
 from app.models.room.model import Room, RoomPublic
+from app.config import settings
 
 ############
 ## Pocket ##
@@ -12,8 +12,16 @@ from app.models.room.model import Room, RoomPublic
 class PocketBase(SQLModel):
     name: str = Field(index=True)
     location: str = Field()
-    label_width: float = Field(default=0)  # in_inches
-    label_height: float = Field(default=0)  # in_inches
+    label_width: float = Field(
+        default=0,
+        ge=settings.printer_min_label_width_inches,
+        le=settings.printer_max_label_width_inches,
+    )  # in_inches
+    label_height: float = Field(
+        default=0,
+        ge=settings.printer_min_label_height_inches,
+        le=settings.printer_max_label_height_inches,
+    )  # in_inches
     chest_id: int = Field(foreign_key="chest.id")
     room_id: int = Field(foreign_key="room.id")
 

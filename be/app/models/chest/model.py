@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship
 from app.models.room.model import Room
-
+from app.config import settings
 
 ############
 ## Chests ##
@@ -9,8 +9,16 @@ from app.models.room.model import Room
 
 class ChestBase(SQLModel):
     name: str = Field(index=True)
-    label_width: float = Field(default=0)  # in_inches
-    label_height: float = Field(default=0)  # in_inches
+    label_width: float = Field(
+        default=0,
+        ge=settings.printer_min_label_width_inches,
+        le=settings.printer_max_label_width_inches,
+    )  # in_inches
+    label_height: float = Field(
+        default=0,
+        ge=settings.printer_min_label_height_inches,
+        le=settings.printer_max_label_height_inches,
+    )  # in_inches
     room_id: int = Field(foreign_key="room.id")
 
 

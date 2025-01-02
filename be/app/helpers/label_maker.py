@@ -28,6 +28,12 @@ def make_label(
     height: float,
     message: str,
 ) -> str:
+    # Validate size thresholds
+    # TODO: IS this even needed if the models limit?
+    if not printer_min_label_width_inches <= width <= printer_max_label_width_inches:
+        raise Exception("Image is too wide for printer")
+    if not printer_min_label_height_inches <= width <= printer_max_label_height_inches:
+        raise Exception("Image is too tall for printer")
     # create message portion
     logger.info("Create label message")
     width = min(width, settings.printer_max_label_width_inches)

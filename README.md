@@ -31,13 +31,14 @@ I'm also considering this to be a fun way to practice some React.
   - [x] Share Data via Env Var and Config
 - [ ] Advanced Backend
   - [x] Upload/Retrieve images on Items
+    - [ ] Route for getting thumbnails, maybe add a query to /photo
   - [x] Create Thumbnails
   - [x] Copy Chests (Create a duplicate with same count and types of pockets, but new ids)
   - [ ] Support Labels
     - [x] Generate QR Code
       - [x] QR Code is stringified JSON like `{ "type": "item", "id": 1 }`
     - [x] Generate Message
-    - [ ] Handle min/max for labels
+    - [x] Handle min/max for labels
     - [ ] Handle text resizing
   - [x] Support Inventory Checking
     - [x] New route that takes in the scan of a qr and returns full data
@@ -48,12 +49,13 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Search fields in tables
   - [ ] Sortable table
   - [ ] Inventory checks
-  - [ ] Support Create Thumbnails
+  - [ ] Support Create Thumbnails, meaning use thumbnails instead of full images
   - [ ] Support Copy Chests
   - [x] Support Labels
     - [x] Update Create
     - [x] Update Modify
     - [x] Handle min/max for labels
+      - [ ] Should height be unbounded?
   - [x] Support Inventory Checking
     - [x] New page that has an input for the value of a qrcode
       - [x] Will display data differently depending on the type

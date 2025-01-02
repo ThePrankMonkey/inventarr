@@ -47,6 +47,14 @@ http POST http://127.0.0.1:5123/chests/1/copy name="Component 2" room_id=1
 http POST http://127.0.0.1:5123/inventory scan='{"type": "pocket", "id": 1}'
 http POST http://127.0.0.1:5123/inventory scan="{\"type\": \"pocket\", \"id\": 1}"
 
+### Validate Min/Max Restraints on Labels
+
+_Should Fail_
+http POST http://127.0.0.1:5123/chests name="Component 2" room_id=1 label_width=3.5 label_height=1.0
+
+_Should Succeed_
+http POST http://127.0.0.1:5123/chests name="Component 2" room_id=1 label_width=1.5 label_height=1.0
+
 ## Notices
 
 Fonts from: https://www.gnu.org/software/freefont/
