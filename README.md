@@ -25,7 +25,7 @@ I'm also considering this to be a fun way to practice some React.
 - [ ] Basic Frontend
   - [x] View
   - [x] Create
-  - [ ] Modify
+  - [x] Modify
   - [ ] Delete
   - [x] Share Data via Env Var and Config
 - [ ] Advanced Backend
@@ -76,3 +76,5 @@ I'm also considering this to be a fun way to practice some React.
   - https://go-upc.com/plans/api
   - https://www.upcitemdb.com/upc/38000001277
   - https://devs.upcitemdb.com/
+- [ ] Include Item Category??? How deep should I take that?
+- [ ] Include Item Brand??? Maybe just toss that under Notes?

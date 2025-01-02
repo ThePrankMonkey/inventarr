@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModifyItem from "./ModifyItem";
 import ModifyPocket from "./ModifyPocket";
 import ModifyChest from "./ModifyChest";
-// import ModifyRoom from "./ModifyRoom";
+import ModifyRoom from "./ModifyRoom";
 
 const Modify = () => {
   const [models, setModels] = useState(["Item", "Pocket", "Chest", "Room"]);
@@ -26,7 +26,7 @@ const Modify = () => {
       {selectedModel == "Item" ? <ModifyItem /> : ""}
       {selectedModel == "Pocket" ? <ModifyPocket /> : ""}
       {selectedModel == "Chest" ? <ModifyChest /> : ""}
-      {/* {selectedModel == "Room" ? <ModifyRoom /> : ""} */}
+      {selectedModel == "Room" ? <ModifyRoom /> : ""}
     </>
   );
 };
