@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ModifyItem from "./ModifyItem";
-// import ModifyPocket from "./ModifyPocket";
+import ModifyPocket from "./ModifyPocket";
 // import ModifyChest from "./ModifyChest";
 // import ModifyRoom from "./ModifyRoom";
 
@@ -24,7 +24,7 @@ const Modify = () => {
         ))}
       </select>
       {selectedModel == "Item" ? <ModifyItem /> : ""}
-      {/* {selectedModel == "Pocket" ? <ModifyPocket /> : ""} */}
+      {selectedModel == "Pocket" ? <ModifyPocket /> : ""}
       {/* {selectedModel == "Chest" ? <ModifyChest /> : ""} */}
       {/* {selectedModel == "Room" ? <ModifyRoom /> : ""} */}
     </>

@@ -84,12 +84,12 @@ def get_pocket_label(
 
 
 @router.patch("/{pocket_id}", response_model=PocketPublic)
-def update_pocket(pocket_id: int, pocket: PocketPublic, session: SessionDep):
+def update_pocket(pocket_id: int, pocket: PocketUpdate, session: SessionDep):
     print(f"Request to PATCH Pocket {pocket_id} with {pocket}")
     db_pocket = session.get(Pocket, pocket_id)
     if not db_pocket:
         raise HTTPException(status_code=404, detail="Pocket not found")
-    pocket_data = Pocket.model_dump(exclude_unset=True)
+    pocket_data = pocket.model_dump(exclude_unset=True)
     db_pocket.sqlmodel_update(pocket_data)
     session.add(db_pocket)
     session.commit()
