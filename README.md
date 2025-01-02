@@ -43,6 +43,11 @@ I'm also considering this to be a fun way to practice some React.
   - [x] Support Inventory Checking
     - [x] New route that takes in the scan of a qr and returns full data
       - [x] Data will be different for different types
+  - [ ] Search fields in Tables
+    - [x] Search Items
+    - [ ] Search Pockets, useful???
+    - [ ] Search Chests
+    - [ ] Search Rooms, useful???
   - [ ] ???
 - [ ] Advanced Frontend
   - [x] Show photos in table

@@ -7,7 +7,7 @@ import uuid
 from fastapi import APIRouter, HTTPException, Query, File, UploadFile, status
 from fastapi.responses import FileResponse
 from PIL import Image
-from sqlmodel import select
+from sqlmodel import select, or_, func
 
 from app.config import settings
 from app.db import SessionDep
@@ -140,3 +140,31 @@ def delete_item(item_id: int, session: SessionDep):
     session.delete(db_item)
     session.commit()
     return {"message": f"Item {item_id} was deleted."}
+
+
+@router.get("/search/{terms}", response_model=list[ItemPublic])
+async def search_items(terms: str, session: SessionDep):
+    """
+    Search for items in all fields containing the given terms.
+
+    Args:
+        terms: A comma-separated string of search terms.
+        session: SQLAlchemy database session.
+
+    Returns:
+        A list of ItemPublic objects matching the search criteria.
+    """
+    search_terms = terms.split(",")
+    search_conditions = []
+
+    for term in search_terms:
+        # Create a list of conditions for each term
+        field_conditions = [
+            getattr(Item, field).contains(term)
+            for field in Item.__table__.columns.keys()
+        ]
+        search_conditions.append(or_(*field_conditions))
+
+    # Combine all term conditions with OR logic
+    items = session.query(Item).filter(or_(*search_conditions)).all()
+    return items
