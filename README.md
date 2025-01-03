@@ -26,15 +26,17 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Add Banner to shoot updates to
   - [x] View
   - [x] Create
+    - [ ] TODO: Add information to banner
   - [x] Modify
     - [x] TODO: Support Item Types in Modify Item
+    - [ ] TODO: Add information to banner
   - [x] Delete
     - [x] TODO: Refresh ListX Components after clicking Delete
     - [ ] TODO: Add information to banner
   - [x] Share Data via Env Var and Config
 - [ ] Advanced Backend
   - [x] Upload/Retrieve images on Items
-    - [ ] Route for getting thumbnails, maybe add a query to /photo
+    - [ ] TODO: Route for getting thumbnails, maybe add a query to /photo
   - [x] Create Thumbnails
   - [x] Copy Chests (Create a duplicate with same count and types of pockets, but new ids)
   - [ ] Support Labels
@@ -49,14 +51,15 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Search fields in Tables
     - [x] Search Items
     - [ ] Search Pockets, useful???
-    - [ ] Search Chests
+    - [ ] Search Chests, useful???
     - [ ] Search Rooms, useful???
   - [ ] Consume Items
     - [ ] Unit conversion (useful for ingredients)
   - [ ] ???
 - [ ] Advanced Frontend
   - [x] Show photos in table
-  - [ ] Search fields in tables
+  - [x] Search fields in tables
+    - [ ] TODO: Why do some images not update between searches?
   - [ ] Sortable table
   - [ ] Inventory checks
   - [ ] Support Create Thumbnails, meaning use thumbnails instead of full images
@@ -91,3 +94,4 @@ I'm also considering this to be a fun way to practice some React.
   - https://devs.upcitemdb.com/
 - [ ] Include Item Category??? How deep should I take that?
 - [ ] Include Item Brand??? Maybe just toss that under Notes?
+- [ ] Should ItemTypes be different Models?

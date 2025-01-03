@@ -5,6 +5,7 @@ const NavBar = () => {
   return (
     <nav>
       <Link to="/view">View Inventory</Link>
+      <Link to="/search">Search</Link>
       <Link to="/scan">Scan</Link>
       <Link to="/create">Create</Link>
       <Link to="/modify">Modify</Link>

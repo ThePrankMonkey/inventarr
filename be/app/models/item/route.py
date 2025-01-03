@@ -168,3 +168,31 @@ async def search_items(terms: str, session: SessionDep):
     # Combine all term conditions with OR logic
     items = session.query(Item).filter(or_(*search_conditions)).all()
     return items
+
+
+@router.get("/search/full/{terms}", response_model=list[ItemPublicFull])
+async def search_items(terms: str, session: SessionDep):
+    """
+    Search for items in all fields containing the given terms.
+
+    Args:
+        terms: A comma-separated string of search terms.
+        session: SQLAlchemy database session.
+
+    Returns:
+        A list of ItemPublic objects matching the search criteria.
+    """
+    search_terms = terms.split(",")
+    search_conditions = []
+
+    for term in search_terms:
+        # Create a list of conditions for each term
+        field_conditions = [
+            getattr(Item, field).contains(term)
+            for field in Item.__table__.columns.keys()
+        ]
+        search_conditions.append(or_(*field_conditions))
+
+    # Combine all term conditions with OR logic
+    items = session.query(Item).filter(or_(*search_conditions)).all()
+    return items
