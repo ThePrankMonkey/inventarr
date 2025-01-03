@@ -178,11 +178,9 @@ def restock_item(
         raise HTTPException(status_code=404, detail="Item not found")
     # check if unit is appropriate, and convert if possible
     try:
-        print(f"Old amount={amount}")
         amount = get_converted_amount(
             amount=amount, from_unit=unit, to_unit=db_item.unit
         )
-        print(f"New amount={amount}")
     except Exception as e:
         raise HTTPException(
             status_code=400,

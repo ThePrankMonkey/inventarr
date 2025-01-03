@@ -31,14 +31,13 @@ def convert_units(amount: float, from_unit: str, to_unit: str) -> float:
 
 
 def check_if_unit(from_unit: str, to_unit: str):
-    print("check unit")
     if from_unit.lower() in ["unit", "units"] and to_unit.lower() in ["unit", "units"]:
         return True
     return False
 
 
 def get_converted_amount(amount: float, from_unit: str, to_unit: str) -> float:
-    print(f"Attempting to convert {from_unit} to {to_unit}")
+    logger.info(f"Attempting to convert {from_unit} to {to_unit}")
     if check_if_unit(from_unit=from_unit, to_unit=to_unit):
         return amount
     else:
