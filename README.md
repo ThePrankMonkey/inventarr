@@ -77,6 +77,7 @@ I'm also considering this to be a fun way to practice some React.
 
 ### Extra Features
 
+- [ ] Increase test coverage to 80% for backend and frontend
 - [ ] Add Auth
   - [ ] Research sidecar vs middleware
 - [x] Use/Restock
