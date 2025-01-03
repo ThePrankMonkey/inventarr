@@ -29,7 +29,7 @@ const ViewItemTable = ({ data }) => {
         </thead>
         <tbody>
           {tableData.map((item, i) => (
-            <tr key={i}>
+            <tr key={item.id}>
               <td>
                 <ItemImageBlobRenderer item={item} />
               </td>

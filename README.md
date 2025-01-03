@@ -59,7 +59,7 @@ I'm also considering this to be a fun way to practice some React.
 - [ ] Advanced Frontend
   - [x] Show photos in table
   - [x] Search fields in tables
-    - [ ] TODO: Why do some images not update between searches?
+    - [x] TODO: Why do some images not update between searches? (Issue was table used index as key instead of item id)
   - [ ] Sortable table
   - [ ] Inventory checks
   - [ ] Support Create Thumbnails, meaning use thumbnails instead of full images
