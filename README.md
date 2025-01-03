@@ -77,10 +77,10 @@ I'm also considering this to be a fun way to practice some React.
 
 ### Extra Features
 
-- [ ] Use/Restock
-  - [ ] Work on Unit Conversions
-  - [ ] Use Ingredients/Components
-  - [ ] Restock Ingredients/Components
+- [x] Use/Restock
+  - [x] Work on Unit Conversions
+  - [x] Use Ingredients/Components
+  - [x] Restock Ingredients/Components
 - [ ] Integrate Barcode Printer
   - [ ] Research Printers
     - https://www.brother-usa.com/products/ql600 ???

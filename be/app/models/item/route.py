@@ -4,13 +4,14 @@ import shutil
 from typing import Annotated, List
 import uuid
 
-from fastapi import APIRouter, HTTPException, Query, File, UploadFile, status
+from fastapi import APIRouter, HTTPException, Query, File, UploadFile, status, Path
 from fastapi.responses import FileResponse
 from PIL import Image
 from sqlmodel import select, or_, func
 
 from app.config import settings
 from app.db import SessionDep
+from app.helpers.unit_converter import get_converted_amount
 from app.models.item.model import (
     item_types,
     Item,
@@ -126,6 +127,68 @@ def update_item(item_id: int, item: ItemUpdate, session: SessionDep):
     item_data = item.model_dump(exclude_unset=True)
     db_item.sqlmodel_update(item_data)
     session.add(db_item)
+    session.commit()
+    session.refresh(db_item)
+    return db_item
+
+
+@router.patch("/{item_id}/consume/{amount}/{unit}", response_model=ItemPublic)
+def consume_item(
+    item_id: int,
+    session: SessionDep,
+    amount: float = Path(..., gt=0),
+    unit: str = "unit",
+):
+    logger.debug(f"Request to PATCH consume {amount} {unit} from Item {item_id}")
+    db_item = session.get(Item, item_id)
+    if not db_item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    # check if unit is appropriate, and convert if possible
+    try:
+        amount = get_converted_amount(
+            amount=amount, from_unit=unit, to_unit=db_item.unit
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unit {unit} not compatible with found {db_item.unit}",
+        )
+    # check if quantity is possible
+    if db_item.quantity < amount:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Item does not have enough quantity [{db_item.quantity} {db_item.unit}] to support consumption",
+        )
+    db_item.quantity -= amount
+    session.commit()
+    session.refresh(db_item)
+    return db_item
+
+
+@router.patch("/{item_id}/restock/{amount}/{unit}", response_model=ItemPublic)
+def restock_item(
+    item_id: int,
+    session: SessionDep,
+    amount: float = Path(..., gt=0),
+    unit: str = "unit",
+):
+    logger.debug(f"Request to PATCH restock {amount} {unit} from Item {item_id}")
+    db_item = session.get(Item, item_id)
+    if not db_item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    # check if unit is appropriate, and convert if possible
+    try:
+        print(f"Old amount={amount}")
+        amount = get_converted_amount(
+            amount=amount, from_unit=unit, to_unit=db_item.unit
+        )
+        print(f"New amount={amount}")
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unit {unit} not compatible with found {db_item.unit}",
+        )
+    db_item.quantity += amount
     session.commit()
     session.refresh(db_item)
     return db_item
