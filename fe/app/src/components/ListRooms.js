@@ -16,7 +16,7 @@ const ListRooms = ({ bubbleUp, roomValue }) => {
       setRooms(data);
     };
     fetchRooms();
-  }, []);
+  }, [roomValue]);
 
   useEffect(() => {
     setSelectedRoom(roomValue);

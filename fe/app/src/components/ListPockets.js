@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import config from "../config";
 
-const ListPockets = ({ bubbleUp }) => {
+const ListPockets = ({ bubbleUp, value }) => {
   const [pockets, setPockets] = useState([]);
   const [selectedPocket, setSelectedPocket] = useState(""); // Selected user from dropdown
 
@@ -15,7 +15,7 @@ const ListPockets = ({ bubbleUp }) => {
       setPockets(data);
     };
     fetchPockets();
-  }, []);
+  }, [value]);
 
   const handlePocketChange = (event) => {
     setSelectedPocket(event.target.value);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import config from "../config";
 
-const ListChests = ({ bubbleUp }) => {
+const ListChests = ({ bubbleUp, value }) => {
   const [chests, setChests] = useState([]);
   const [selectedChest, setSelectedChest] = useState(""); // Selected user from dropdown
 
@@ -15,7 +15,7 @@ const ListChests = ({ bubbleUp }) => {
       setChests(data);
     };
     fetchChests();
-  }, []);
+  }, [value]);
 
   const handleChestChange = (event) => {
     setSelectedChest(event.target.value);
