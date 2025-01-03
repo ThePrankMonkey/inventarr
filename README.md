@@ -53,8 +53,8 @@ I'm also considering this to be a fun way to practice some React.
     - [ ] Search Pockets, useful???
     - [ ] Search Chests, useful???
     - [ ] Search Rooms, useful???
-  - [ ] Consume Items
-    - [ ] Unit conversion (useful for ingredients)
+  - [x] Consume Items
+    - [x] Unit conversion (useful for ingredients)
   - [ ] ???
 - [ ] Advanced Frontend
   - [x] Show photos in table
@@ -77,6 +77,8 @@ I'm also considering this to be a fun way to practice some React.
 
 ### Extra Features
 
+- [ ] Add Auth
+  - [ ] Research sidecar vs middleware
 - [x] Use/Restock
   - [x] Work on Unit Conversions
   - [x] Use Ingredients/Components
