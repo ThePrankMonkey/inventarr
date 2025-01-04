@@ -13,20 +13,28 @@ const Scan = () => {
   };
 
   const handleSubmit = async () => {
-    const payload = { scan: scanString };
-    console.log("Sending Payload File: ", payload);
-    const response = await fetch(`${config.BACKEND_URL}/inventory/v2`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    const data = await response.json();
-    console.log(data);
-    setResponseData(data);
-    // Highlight the whole input to allow full overwrite on next scan
-    handleFocus();
+    try {
+      const payload = { scan: scanString };
+      console.log("Sending Payload File: ", payload);
+      const response = await fetch(`${config.BACKEND_URL}/inventory/v2`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      setResponseData(data);
+      // Highlight the whole input to allow full overwrite on next scan
+      handleFocus();
+    } catch (error) {
+      // Handle errors (e.g., display an error message)
+      console.error("Error submitting form:", error);
+    }
   };
 
   const handleFocus = () => {
