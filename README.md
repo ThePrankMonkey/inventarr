@@ -60,6 +60,7 @@ I'm also considering this to be a fun way to practice some React.
   - [x] Show photos in table
   - [x] Search fields in tables
     - [x] TODO: Why do some images not update between searches? (Issue was table used index as key instead of item id)
+    - [x] TODO: Handle bad requests better, like if the string isn't stringified json.
   - [ ] Sortable table
   - [ ] Inventory checks
   - [ ] Support Create Thumbnails, meaning use thumbnails instead of full images
