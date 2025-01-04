@@ -6,7 +6,6 @@ import { preventExtremeLabels } from "../helpers";
 import ListPockets from "./ListPockets";
 import ListRooms from "./ListRooms";
 import ListRoomChests from "./ListRoomChests";
-import ListChestPockets from "./ListChestPockets";
 
 const ModifyPocket = () => {
   const minLabel = config.MIN_LABEL_WIDTH_INCHES;

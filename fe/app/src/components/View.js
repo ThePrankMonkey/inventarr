@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import ItemImageBlobRenderer from "./ItemImageBlobRenderer";
 import ViewItemTable from "./ViewItemTable";
 import config from "../config";
 

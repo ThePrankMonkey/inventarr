@@ -24,10 +24,10 @@ const Modify = () => {
           </option>
         ))}
       </select>
-      {selectedModel == "Item" ? <DeleteItem /> : ""}
-      {selectedModel == "Pocket" ? <DeletePocket /> : ""}
-      {selectedModel == "Chest" ? <DeleteChest /> : ""}
-      {selectedModel == "Room" ? <DeleteRoom /> : ""}
+      {selectedModel === "Item" ? <DeleteItem /> : ""}
+      {selectedModel === "Pocket" ? <DeletePocket /> : ""}
+      {selectedModel === "Chest" ? <DeleteChest /> : ""}
+      {selectedModel === "Room" ? <DeleteRoom /> : ""}
     </>
   );
 };

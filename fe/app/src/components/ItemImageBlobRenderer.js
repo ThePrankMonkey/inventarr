@@ -28,7 +28,7 @@ const ItemImageBlobRenderer = ({ item }) => {
       {imageUrl && (
         <img
           src={imageUrl}
-          alt={`Fetched Image for item ${item.id}`}
+          alt={`Fetched item ${item.id}`}
           width="75"
           height="75"
         />
