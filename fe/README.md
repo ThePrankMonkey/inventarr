@@ -1,3 +1,10 @@
+## Commands
+
+```bash
+# Add a package
+docker compose exec fe npm install --save --prefix ./app react-toastify
+```
+
 ## Issues
 
 ### Issue = Could not read package.json

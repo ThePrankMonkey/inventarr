@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import ListItemTypes from "./ListItemTypes";
 import ListRooms from "./ListRooms";
@@ -88,9 +89,22 @@ const CreateItem = () => {
         body: JSON.stringify(payloadItem),
       });
       const dataItem = await responseItem.json();
-      console.log(dataItem);
+      console.debug(dataItem);
+      // Handle notification
+      toast.success(`Create Successful for new Item`, {
+        theme: "colored",
+      });
+      // Clear relevant fields
+      setFormData({
+        ...formData,
+        name: "",
+      });
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // Handle errors (e.g., display an error message)
+      console.error("Error submitting form:", error);
+      toast.error(`Error submitting form: ${error.message}`, {
+        theme: "colored",
+      });
     }
   };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css"; // Import your CSS styles
 import "./mvp.css"; // Import your CSS styles
 import NavBar from "./components/NavBar";
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer />
         <NavBar />
         <Routes>
           <Route path="/" element={<View />} />

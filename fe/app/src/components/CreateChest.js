@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import ListRooms from "./ListRooms";
 import config from "../config";
@@ -38,11 +39,22 @@ const CreateChest = () => {
         throw new Error("Network response was not ok");
       }
       console.log(response.json());
-      //TODO Update Banner
-      //TODO Clear some fields like name, quantity, UPC, and notes. Leave room/chest/pocket.
+      // Handle notification
+      toast.success(`Create Successful for new Chest`, {
+        theme: "colored",
+      });
+      // Clear relevant fields
+      setFormData({
+        ...formData,
+        name: "",
+        location: "",
+      });
     } catch (error) {
       // Handle errors (e.g., display an error message)
       console.error("Error submitting form:", error);
+      toast.error(`Error submitting form: ${error.message}`, {
+        theme: "colored",
+      });
     }
   };
 

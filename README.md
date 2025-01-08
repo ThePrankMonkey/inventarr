@@ -26,7 +26,7 @@ I'm also considering this to be a fun way to practice some React.
   - [ ] Add Banner to shoot updates to
   - [x] View
   - [x] Create
-    - [ ] TODO: Add information to banner
+    - [x] TODO: Add information to banner
   - [x] Modify
     - [x] TODO: Support Item Types in Modify Item
     - [ ] TODO: Add information to banner
@@ -74,6 +74,9 @@ I'm also considering this to be a fun way to practice some React.
     - [x] New page that has an input for the value of a qrcode
       - [x] Will display data differently depending on the type
       - [x] Will select the input so a new entry will override and kick off new data pull
+  - [ ] Convert Docker Compose to Kubernetes.
+    - [x] Research options: [Kompose](https://github.com/kubernetes/kompose)
+    - [ ] TODO: Clean up artifacts using proper `.dockerignore`
   - [ ] ???
 
 ### Extra Features
