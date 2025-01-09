@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
 import ScanDisplayResults from "./ScanDisplayResults";
 import config from "../config";
@@ -34,6 +35,9 @@ const Scan = () => {
     } catch (error) {
       // Handle errors (e.g., display an error message)
       console.error("Error submitting form:", error);
+      toast.error(`Error submitting form: ${error.message}`, {
+        theme: "colored",
+      });
     }
   };
 

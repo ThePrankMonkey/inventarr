@@ -32,7 +32,7 @@ I'm also considering this to be a fun way to practice some React.
     - [ ] TODO: Add information to banner
   - [x] Delete
     - [x] TODO: Refresh ListX Components after clicking Delete
-    - [ ] TODO: Add information to banner
+    - [x] TODO: Add information to banner
   - [x] Share Data via Env Var and Config
 - [ ] Advanced Backend
   - [x] Upload/Retrieve images on Items
@@ -61,6 +61,7 @@ I'm also considering this to be a fun way to practice some React.
   - [x] Search fields in tables
     - [x] TODO: Why do some images not update between searches? (Issue was table used index as key instead of item id)
     - [x] TODO: Handle bad requests better, like if the string isn't stringified json.
+    - [ ] TODO: Add information to banner
   - [ ] Sortable table
   - [ ] Inventory checks
   - [ ] Support Create Thumbnails, meaning use thumbnails instead of full images
@@ -70,10 +71,11 @@ I'm also considering this to be a fun way to practice some React.
     - [x] Update Modify
     - [x] Handle min/max for labels
       - [ ] Should height be unbounded?
-  - [x] Support Inventory Checking
+  - [x] Scan, support inventory checking
     - [x] New page that has an input for the value of a qrcode
       - [x] Will display data differently depending on the type
       - [x] Will select the input so a new entry will override and kick off new data pull
+    - [x] TODO: Add information to banner
   - [ ] Convert Docker Compose to Kubernetes.
     - [x] Research options: [Kompose](https://github.com/kubernetes/kompose)
     - [ ] TODO: Clean up artifacts using proper `.dockerignore`

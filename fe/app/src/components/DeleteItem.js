@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import ListItems from "./ListItems";
 import config from "../config";
@@ -24,12 +25,18 @@ const DeleteItem = () => {
       }
       const data = await response.json();
       console.log(data);
-      //TODO: Update Banner
+      // Handle notification
+      toast.success(`Delete Successful for Item ${selectedId}`, {
+        theme: "colored",
+      });
+      // Clear relevant fields
       setSelectedId("");
     } catch (error) {
       // Handle errors (e.g., display an error message)
-      //TODO: Update Banner
       console.error("Error submitting form:", error);
+      toast.error(`Error submitting form: ${error.message}`, {
+        theme: "colored",
+      });
     }
   };
 

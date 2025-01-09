@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import ListPockets from "./ListPockets";
 import config from "../config";
@@ -25,11 +26,18 @@ const DeletePocket = () => {
       const data = await response.json();
       console.log(data);
       setSelectedId("");
-      //TODO: Update Banner
+      // Handle notification
+      toast.success(`Delete Successful for Pocket ${selectedId}`, {
+        theme: "colored",
+      });
+      // Clear relevant fields
+      setSelectedId("");
     } catch (error) {
       // Handle errors (e.g., display an error message)
-      //TODO: Update Banner
       console.error("Error submitting form:", error);
+      toast.error(`Error submitting form: ${error.message}`, {
+        theme: "colored",
+      });
     }
   };
 
