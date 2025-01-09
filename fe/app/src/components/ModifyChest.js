@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import config from "../config";
 import { preventExtremeLabels } from "../helpers";
@@ -74,10 +75,16 @@ const ModifyChest = () => {
         throw new Error("Network response was not ok");
       }
       console.log(response.json());
-      //TODO Update Banner
+      // Handle notification
+      toast.success(`Modify Successful for Chest ${chestId}`, {
+        theme: "colored",
+      });
     } catch (error) {
       // Handle errors (e.g., display an error message)
       console.error("Error submitting form:", error);
+      toast.error(`Error submitting form: ${error.message}`, {
+        theme: "colored",
+      });
     }
   };
 

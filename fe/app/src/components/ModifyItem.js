@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 import config from "../config";
 
@@ -150,11 +151,16 @@ const ModifyItem = () => {
         throw new Error("Network response was not ok");
       }
       console.log(response.json());
-      //TODO Update Banner
-      //TODO Clear some fields like name, quantity, UPC, and notes. Leave room/chest/pocket.
+      // Handle notification
+      toast.success(`Modify Successful for Item ${itemId}`, {
+        theme: "colored",
+      });
     } catch (error) {
       // Handle errors (e.g., display an error message)
       console.error("Error submitting form:", error);
+      toast.error(`Error submitting form: ${error.message}`, {
+        theme: "colored",
+      });
     }
   };
 

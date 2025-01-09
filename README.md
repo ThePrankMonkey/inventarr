@@ -22,14 +22,14 @@ I'm also considering this to be a fun way to practice some React.
   - [x] CRUD for Chests
   - [x] CRUD for Pocketss
   - [x] CRUD for Items
-- [ ] Basic Frontend
-  - [ ] Add Banner to shoot updates to
+- [x] Basic Frontend
+  - [x] Add Banner to shoot updates to
   - [x] View
   - [x] Create
     - [x] TODO: Add information to banner
   - [x] Modify
     - [x] TODO: Support Item Types in Modify Item
-    - [ ] TODO: Add information to banner
+    - [x] TODO: Add information to banner
   - [x] Delete
     - [x] TODO: Refresh ListX Components after clicking Delete
     - [x] TODO: Add information to banner
