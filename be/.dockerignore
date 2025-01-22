@@ -1,0 +1,25 @@
+# This is a .dockerignore file
+
+# Hidden files
+.git
+.DS_Store
+
+# IDE files
+*.vscode
+
+# Test results
+**/test-results/**
+**/target/**
+
+# IDE-specific files
+# (adjust as needed for your IDE)
+*.pyc
+*.class
+
+# Temporary files
+**/__pycache__**
+.direnv
+.coverage
+database.db
+# poetry.lock
+# README.md

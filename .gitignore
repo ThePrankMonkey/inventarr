@@ -8,3 +8,7 @@ be/migrations/versions
 be/photos/
 be/tests/database.db
 be/.coverage
+
+
+# temp
+k8s/

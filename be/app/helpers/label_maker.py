@@ -30,9 +30,17 @@ def make_label(
 ) -> str:
     # Validate size thresholds
     # TODO: IS this even needed if the models limit?
-    if not printer_min_label_width_inches <= width <= printer_max_label_width_inches:
+    if (
+        not settings.printer_min_label_width_inches
+        <= width
+        <= settings.printer_max_label_width_inches
+    ):
         raise Exception("Image is too wide for printer")
-    if not printer_min_label_height_inches <= width <= printer_max_label_height_inches:
+    if (
+        not settings.printer_min_label_height_inches
+        <= width
+        <= settings.printer_max_label_height_inches
+    ):
         raise Exception("Image is too tall for printer")
     # create message portion
     logger.info("Create label message")
@@ -47,6 +55,9 @@ def make_label(
     canvas = ImageDraw.Draw(base_image)
     logger.info(settings.label_font_path)
     font = ImageFont.truetype(settings.label_font_path, 36)
+    # add a label, may remove later...
+    canvas.rectangle(xy=(0, 0, width_pixels, height_pixels), width=3)
+    # add message TODO: figure out better alignment...
     canvas.text((0, 0), message, font=font, fill="black")
     # create QR portion
     logger.info("Create label qr")

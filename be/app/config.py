@@ -14,12 +14,13 @@ class Settings(BaseSettings):
     database_url: str
     storage_path: str
     thumbnail_size: tuple = (75, 75)
-    qr_scale: int = 3
+    qr_scale: int = 5
     printer_min_label_width_inches: float = 0
     printer_max_label_width_inches: float = 2.4
     printer_min_label_height_inches: float = 0
     printer_max_label_height_inches: float = 2.4
     printer_dpi: int = 300
+    printer_name: str = "Canon_MF260"
     font_path: str = os.path.abspath(
         os.path.join(
             current_directory,

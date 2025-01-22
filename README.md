@@ -104,3 +104,11 @@ I'm also considering this to be a fun way to practice some React.
 - [ ] Include Item Category??? How deep should I take that?
 - [ ] Include Item Brand??? Maybe just toss that under Notes?
 - [ ] Should ItemTypes be different Models?
+  - [ ] Ingredient could have an expiration date
+  - [ ] Component could default to Unit.
+- [x] Print all labels under asset.
+  - [x] Script to kick off multiple print requests to printer server.
+    - [x] Handle single request
+    - [x] Handle recursive request
+  - [x] https://ubuntu.com/server/docs/install-and-configure-a-cups-print-server
+- [ ] ???
