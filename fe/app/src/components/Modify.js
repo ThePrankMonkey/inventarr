@@ -5,7 +5,7 @@ import ModifyChest from "./ModifyChest";
 import ModifyRoom from "./ModifyRoom";
 
 const Modify = () => {
-  const [models, setModels] = useState(["Item", "Pocket", "Chest", "Room"]);
+  const models = ["Item", "Pocket", "Chest", "Room"];
   const [selectedModel, setSelectedModel] = useState("");
 
   const handleModelSelect = (event) => {
