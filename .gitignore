@@ -12,3 +12,4 @@ be/.coverage
 
 # temp
 k8s/
+be/db_backups/*.csv

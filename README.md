@@ -111,4 +111,8 @@ I'm also considering this to be a fun way to practice some React.
     - [x] Handle single request
     - [x] Handle recursive request
   - [x] https://ubuntu.com/server/docs/install-and-configure-a-cups-print-server
+- [ ] Handle export/import to/from CSVs
+  - [x] Export
+    - [x] Handle sigle or all models
+  - [ ] Import
 - [ ] ???
